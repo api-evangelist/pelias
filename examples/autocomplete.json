@@ -1,0 +1,52 @@
+{
+  "description": "Example: autocomplete 'Lon' focused near San Francisco — demonstrates type-ahead",
+  "request": {
+    "method": "GET",
+    "url": "https://api.geocode.earth/v1/autocomplete?text=Lon&focus.point.lat=51.5&focus.point.lon=-0.12"
+  },
+  "response": {
+    "geocoding": {
+      "version": "1.0",
+      "attribution": "https://geocode.earth/guidelines",
+      "query": {
+        "text": "Lon",
+        "size": 10,
+        "private": false,
+        "focus.point.lat": 51.5,
+        "focus.point.lon": -0.12
+      },
+      "engine": {
+        "name": "Pelias",
+        "author": "Mapzen",
+        "version": "1.0"
+      },
+      "timestamp": 1525718151924
+    },
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-0.125422, 51.501581]
+        },
+        "properties": {
+          "id": "101750367",
+          "gid": "whosonfirst:locality:101750367",
+          "layer": "locality",
+          "source": "whosonfirst",
+          "source_id": "101750367",
+          "name": "London",
+          "confidence": 1.0,
+          "country": "United Kingdom",
+          "country_a": "GBR",
+          "macroregion": "England",
+          "locality": "London",
+          "locality_gid": "whosonfirst:locality:101750367",
+          "label": "London, England, United Kingdom"
+        }
+      }
+    ],
+    "bbox": [-0.4984345, 51.297207, 0.27894, 51.6843015]
+  }
+}

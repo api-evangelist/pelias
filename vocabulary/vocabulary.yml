@@ -1,0 +1,105 @@
+title: Pelias Geocoding Vocabulary
+description: Key terms and concepts used in the Pelias geocoding API
+source: https://github.com/pelias/documentation
+terms:
+  - term: geocoding
+    definition: >
+      The process of converting an address, place name, or other text into geographic
+      coordinates (latitude and longitude).
+
+  - term: reverse geocoding
+    definition: >
+      The process of converting geographic coordinates (latitude and longitude) into a
+      human-readable address or place name.
+
+  - term: forward geocoding
+    definition: >
+      Synonym for geocoding — converting text into coordinates. Pelias supports this via
+      the /search and /search/structured endpoints.
+
+  - term: autocomplete
+    definition: >
+      Type-ahead geocoding that returns suggestions as a user types partial text. Pelias
+      exposes this via the /autocomplete endpoint. Best used with client-side throttling
+      (5–10 requests per second).
+
+  - term: gid
+    definition: >
+      Pelias Global Identifier — a unique string that identifies a place record within
+      Pelias. Format is source:layer:id (e.g. whosonfirst:locality:101750367). GIDs should
+      not be constructed manually and may not be stable across data imports for some sources.
+
+  - term: layer
+    definition: >
+      The data type or geographic hierarchy level of a result. Valid layers include:
+      venue, address, street, neighbourhood, borough, localadmin, locality, county,
+      macrocounty, region, macroregion, country, coarse, postalcode.
+
+  - term: source
+    definition: >
+      The open dataset that provided a result. Pelias uses four main sources:
+      OpenStreetMap (osm), OpenAddresses (oa), Who's on First (wof), and GeoNames (gn).
+
+  - term: confidence
+    definition: >
+      A score between 0 and 1 indicating how well a result matches the query. For /reverse,
+      based on distance from the query point. For /search, based on how well properties match
+      the parsed input text.
+
+  - term: label
+    definition: >
+      A human-friendly, display-ready string representing the full place name, formatted
+      appropriately for the result's region (e.g. "London, England, United Kingdom").
+
+  - term: focus point
+    definition: >
+      A geographic coordinate used to bias search results toward a specific area without
+      restricting results to that area. Provided via focus.point.lat and focus.point.lon.
+
+  - term: boundary
+    definition: >
+      A geographic constraint that restricts search results to a specific area. Can be
+      a rectangle (boundary.rect.*), circle (boundary.circle.*), country (boundary.country),
+      or a Pelias gid (boundary.gid).
+
+  - term: structured geocoding
+    definition: >
+      A geocoding mode where the query is expressed as separate address components
+      (address, locality, region, country, etc.) rather than free-form text. Available
+      via /search/structured. Currently in beta.
+
+  - term: GeoJSON
+    definition: >
+      The response format for all Pelias endpoints. A GeoJSON FeatureCollection where
+      each feature is a matched place. Coordinates are [longitude, latitude] per the GeoJSON
+      specification (RFC 7946).
+
+  - term: OpenStreetMap (OSM)
+    definition: >
+      A collaborative, open-license map dataset used as a Pelias data source for venues,
+      addresses, and administrative areas. Short name 'osm'. IDs are not stable across imports.
+
+  - term: OpenAddresses (OA)
+    definition: >
+      An open dataset of global address points used as a Pelias data source. Short name 'oa'.
+      IDs are not stable across imports.
+
+  - term: Who's on First (WOF)
+    definition: >
+      Mapzen's open gazetteer of places from the neighbourhood to country level. Used by
+      Pelias for administrative hierarchy data. Short name 'wof'. Has stable IDs.
+
+  - term: GeoNames (GN)
+    definition: >
+      A global geographical database covering 11 million place names. Used by Pelias as a
+      supplementary data source. Short name 'gn'. Has stable IDs.
+
+  - term: coarse geocoding
+    definition: >
+      Geocoding that returns only administrative areas (country, region, county, locality, etc.)
+      without venues or address-level results. Achieved by specifying 'coarse' as the layer.
+
+  - term: interpolation
+    definition: >
+      Address interpolation is a technique to estimate the location of an address when the
+      exact address is not in the dataset. Interpolated results do not have a stable gid.

@@ -1,0 +1,55 @@
+{
+  "description": "Example: structured geocoding for '30 West 26th Street, New York, NY'",
+  "request": {
+    "method": "GET",
+    "url": "https://api.geocode.earth/v1/search/structured?address=30%20West%2026th%20Street&locality=New%20York&region=NY"
+  },
+  "response": {
+    "geocoding": {
+      "version": "1.0",
+      "attribution": "https://geocode.earth/guidelines",
+      "query": {
+        "address": "30 West 26th Street",
+        "locality": "New York",
+        "region": "NY",
+        "size": 10,
+        "private": false
+      },
+      "engine": {
+        "name": "Pelias",
+        "author": "Mapzen",
+        "version": "1.0"
+      },
+      "timestamp": 1525718151924
+    },
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-73.9912, 40.7448]
+        },
+        "properties": {
+          "id": "9876543",
+          "gid": "openaddresses:address:9876543",
+          "layer": "address",
+          "source": "openaddresses",
+          "source_id": "9876543",
+          "name": "30 West 26th Street",
+          "housenumber": "30",
+          "street": "West 26th Street",
+          "postalcode": "10010",
+          "confidence": 0.95,
+          "country": "United States",
+          "country_a": "USA",
+          "region": "New York",
+          "region_a": "NY",
+          "borough": "Manhattan",
+          "locality": "New York",
+          "label": "30 West 26th Street, Manhattan, New York, NY, USA"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "description": "Example: forward geocode 'YMCA' with focus on San Francisco",
+  "request": {
+    "method": "GET",
+    "url": "https://api.geocode.earth/v1/search?text=YMCA&focus.point.lat=37.7749&focus.point.lon=-122.4194&size=3"
+  },
+  "response": {
+    "geocoding": {
+      "version": "1.0",
+      "attribution": "https://geocode.earth/guidelines",
+      "query": {
+        "text": "YMCA",
+        "size": 3,
+        "private": false,
+        "focus.point.lat": 37.7749,
+        "focus.point.lon": -122.4194,
+        "lang": {
+          "name": "English",
+          "iso6391": "en",
+          "iso6393": "eng",
+          "defaulted": true
+        }
+      },
+      "engine": {
+        "name": "Pelias",
+        "author": "Mapzen",
+        "version": "1.0"
+      },
+      "timestamp": 1525718151924
+    },
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-122.413, 37.784]
+        },
+        "properties": {
+          "id": "node/1234567",
+          "gid": "openstreetmap:venue:node/1234567",
+          "layer": "venue",
+          "source": "openstreetmap",
+          "source_id": "node/1234567",
+          "name": "YMCA",
+          "confidence": 0.9,
+          "country": "United States",
+          "country_a": "USA",
+          "region": "California",
+          "region_a": "CA",
+          "locality": "San Francisco",
+          "label": "YMCA, San Francisco County, CA"
+        }
+      }
+    ],
+    "bbox": [-122.413, 37.784, -122.413, 37.784]
+  }
+}

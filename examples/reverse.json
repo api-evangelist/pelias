@@ -1,0 +1,58 @@
+{
+  "description": "Example: reverse geocode the Eiffel Tower coordinates",
+  "request": {
+    "method": "GET",
+    "url": "https://api.geocode.earth/v1/reverse?point.lat=48.858268&point.lon=2.294471"
+  },
+  "response": {
+    "geocoding": {
+      "version": "1.0",
+      "attribution": "https://geocode.earth/guidelines",
+      "query": {
+        "point.lat": 48.858268,
+        "point.lon": 2.294471,
+        "size": 10,
+        "private": false,
+        "lang": {
+          "name": "English",
+          "iso6391": "en",
+          "iso6393": "eng",
+          "defaulted": true
+        }
+      },
+      "engine": {
+        "name": "Pelias",
+        "author": "Mapzen",
+        "version": "1.0"
+      },
+      "timestamp": 1525718151924
+    },
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [2.294471, 48.858268]
+        },
+        "properties": {
+          "id": "way/5013364",
+          "gid": "openstreetmap:venue:way/5013364",
+          "layer": "venue",
+          "source": "openstreetmap",
+          "source_id": "way/5013364",
+          "name": "Tour Eiffel",
+          "confidence": 0.9,
+          "distance": 0.0,
+          "country": "France",
+          "country_a": "FRA",
+          "region": "Île-de-France",
+          "locality": "Paris",
+          "neighbourhood": "Gros-Caillou",
+          "label": "Tour Eiffel, Paris, France"
+        }
+      }
+    ],
+    "bbox": [2.2882, 48.8547, 2.3001, 48.8614]
+  }
+}

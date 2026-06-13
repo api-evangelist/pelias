@@ -1,0 +1,94 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "pelias": "https://pelias.io/vocab#",
+    "geojson": "https://purl.org/geojson/vocab#",
+    "gid": "pelias:gid",
+    "layer": "pelias:layer",
+    "source": "pelias:source",
+    "source_id": "pelias:sourceId",
+    "confidence": "pelias:confidence",
+    "label": "pelias:label",
+    "distance": "pelias:distanceKm",
+    "country_a": "pelias:countryCodeAlpha3",
+    "region_a": "pelias:regionCode",
+    "GeocodingResponse": "pelias:GeocodingResponse",
+    "GeocodingFeature": "pelias:GeocodingFeature",
+    "geocoding": "pelias:geocodingMetadata",
+    "name": "name",
+    "country": "addressCountry",
+    "region": "addressRegion",
+    "locality": "addressLocality",
+    "postalcode": "postalCode",
+    "street": "streetAddress",
+    "housenumber": "streetNumber",
+    "neighbourhood": "pelias:neighbourhood",
+    "borough": "pelias:borough",
+    "county": "pelias:county",
+    "macroregion": "pelias:macroregion",
+    "venue": "LocalBusiness",
+    "address": "PostalAddress",
+    "Place": "Place",
+    "GeoCoordinates": "GeoCoordinates",
+    "latitude": "latitude",
+    "longitude": "longitude"
+  },
+  "@graph": [
+    {
+      "@id": "https://pelias.io",
+      "@type": "WebAPI",
+      "name": "Pelias Geocoding API",
+      "description": "Open-source modular geocoding search engine built on Elasticsearch, powered by OpenStreetMap, OpenAddresses, Who's on First, and GeoNames.",
+      "url": "https://pelias.io",
+      "documentation": "https://github.com/pelias/documentation",
+      "license": "https://github.com/pelias/pelias/blob/master/LICENSE",
+      "provider": {
+        "@type": "Organization",
+        "name": "Pelias",
+        "url": "https://github.com/pelias",
+        "sameAs": "https://geocode.earth"
+      },
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "name": "Forward Geocoding",
+          "target": "https://api.geocode.earth/v1/search?text={text}",
+          "query-input": "required name=text"
+        },
+        {
+          "@type": "SearchAction",
+          "name": "Reverse Geocoding",
+          "target": "https://api.geocode.earth/v1/reverse?point.lat={latitude}&point.lon={longitude}",
+          "query-input": [
+            "required name=latitude",
+            "required name=longitude"
+          ]
+        },
+        {
+          "@type": "SearchAction",
+          "name": "Autocomplete",
+          "target": "https://api.geocode.earth/v1/autocomplete?text={text}",
+          "query-input": "required name=text"
+        }
+      ],
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://api.geocode.earth/v1",
+        "serviceType": "REST"
+      },
+      "encodingFormat": "application/geo+json",
+      "keywords": [
+        "geocoding",
+        "reverse geocoding",
+        "geospatial",
+        "open source",
+        "elasticsearch",
+        "openstreetmap",
+        "addresses",
+        "places",
+        "autocomplete",
+        "GeoJSON"
+      ]
+    }
+  ]
+}
