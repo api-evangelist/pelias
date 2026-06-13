@@ -1,0 +1,70 @@
+name: Pelias
+description: Pelias is a modular, open-source geocoding search engine built on Elasticsearch that converts addresses and place names into geographic coordinates (forward geocoding) and geographic coordinates into places and addresses (reverse geocoding). Powered entirely by open data from OpenStreetMap, OpenAddresses, Who's on First, and Geonames, it is freely available under the MIT license and can be self-hosted or accessed via hosted services.
+image: https://pelias.io/images/pelias-logo.png
+tags:
+  - geocoding
+  - reverse geocoding
+  - geospatial
+  - open source
+  - elasticsearch
+  - openstreetmap
+  - addresses
+  - places
+  - autocomplete
+created: "2026-06-13"
+modified: "2026-06-13"
+url: https://raw.githubusercontent.com/api-evangelist/pelias/main/apis.yml
+specificationVersion: "0.19"
+apis:
+  - name: Pelias Geocoding API
+    description: REST API for forward geocoding, reverse geocoding, autocomplete, structured geocoding, and place lookup. Returns results as GeoJSON and is powered by open data sources including OpenStreetMap, OpenAddresses, Who's on First, and Geonames.
+    humanURL: https://github.com/pelias/documentation
+    baseURL: https://api.geocode.earth/v1
+    tags:
+      - geocoding
+      - reverse geocoding
+      - autocomplete
+      - places
+      - geojson
+    properties:
+      - type: Documentation
+        url: https://github.com/pelias/documentation
+      - type: OpenAPI
+        url: https://github.com/pelias/api
+      - type: GitHubOrganization
+        url: https://github.com/pelias
+      - type: GitHubRepository
+        url: https://github.com/pelias/pelias
+      - type: Docker
+        url: https://github.com/pelias/docker
+      - type: Plans
+        url: https://raw.githubusercontent.com/api-evangelist/pelias/main/plans/plans.yml
+      - type: RateLimits
+        url: https://raw.githubusercontent.com/api-evangelist/pelias/main/rate-limits/rate-limits.yml
+      - type: FinOps
+        url: https://raw.githubusercontent.com/api-evangelist/pelias/main/finops/finops.yml
+    contact:
+      - FN: Pelias Team
+        email: team@pelias.io
+        X-twitter: pelias_geocoder
+        X-github: https://github.com/pelias
+        X-gitter: https://gitter.im/pelias/pelias
+common:
+  - type: Website
+    url: https://pelias.io
+  - type: Documentation
+    url: https://github.com/pelias/documentation
+  - type: GitHubOrganization
+    url: https://github.com/pelias
+  - type: License
+    url: https://github.com/pelias/pelias/blob/master/LICENSE
+  - type: HostedService
+    url: https://geocode.earth
+  - type: Status
+    url: https://github.com/pelias/pelias/issues
+  - type: Support
+    url: https://gitter.im/pelias/pelias
+maintainers:
+  - FN: Kin Lane
+    X-twitter: apievangelist
+    email: kin@apievangelist.com

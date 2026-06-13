@@ -1,0 +1,68 @@
+finops:
+  summary: >
+    Pelias is MIT-licensed open-source software with no software licensing costs.
+    The primary cost model is infrastructure (self-hosted) or subscription-based
+    (Geocode Earth hosted service). Because it is powered entirely by open data,
+    there are no data licensing fees. The hosted Geocode Earth service provides
+    predictable monthly billing starting at $100/month.
+
+  costModels:
+    - model: Self-Hosted
+      description: >
+        Run Pelias on your own servers or cloud infrastructure. No software cost.
+        Costs are driven by Elasticsearch cluster sizing, data storage for imported
+        datasets (OpenStreetMap, OpenAddresses, etc.), compute, and bandwidth.
+      costDrivers:
+        - Elasticsearch cluster (dominant cost)
+        - Server/VM compute for API, Placeholder, PIP, Interpolation services
+        - Storage for geocoding datasets (can be several hundred GB to TB)
+        - Bandwidth for import and serving
+        - Operational overhead for maintenance and updates
+      estimatedMonthlyCost: "Varies; small deployments ~$50-300/month cloud infra"
+
+    - model: Geocode Earth Hosted
+      description: >
+        Pay-per-plan subscription to the commercial Pelias API operated by the
+        original Pelias creators. Predictable monthly billing with no infrastructure
+        management required.
+      tiers:
+        - name: Lite
+          monthlyPrice: 100
+          currency: USD
+          requestsIncluded: 150000
+          costPerThousandRequests: 0.67
+        - name: Basic
+          monthlyPrice: 200
+          currency: USD
+          requestsIncluded: 400000
+          costPerThousandRequests: 0.50
+        - name: Advanced
+          monthlyPrice: 500
+          currency: USD
+          requestsIncluded: 2000000
+          costPerThousandRequests: 0.25
+        - name: Custom
+          monthlyPrice: negotiable
+          currency: USD
+          requestsIncluded: "50000000+"
+          costPerThousandRequests: negotiable
+
+  costOptimizationTips:
+    - Cache geocoding results client-side or server-side; Geocode Earth explicitly permits storing results indefinitely.
+    - Use autocomplete endpoint only for interactive search; batch offline geocoding against the search endpoint.
+    - Self-host for high-volume use cases where cloud infrastructure cost is less than hosted plan cost.
+    - Geocode Earth offers discounts for open-source projects and non-profits — contact them directly.
+    - Use structured geocoding (/v1/search/structured) when input data is already parsed to improve match accuracy and reduce retry requests.
+    - Import only the data sources relevant to your geography to reduce Elasticsearch index size and query costs.
+
+  openSourceDiscounts:
+    available: true
+    notes: >
+      Geocode Earth offers free or discounted plans for qualifying open-source
+      projects. Contact team@pelias.io or via https://geocode.earth for details.
+
+  trialAvailability:
+    available: true
+    duration: "2 weeks"
+    creditCardRequired: false
+    url: https://geocode.earth

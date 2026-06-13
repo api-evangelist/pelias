@@ -1,0 +1,70 @@
+plans:
+  - name: Self-Hosted (Open Source)
+    description: Run Pelias on your own infrastructure using the open-source codebase and Docker setup. No cost for the software itself; infrastructure costs apply. MIT licensed.
+    url: https://github.com/pelias/docker
+    price: Free
+    pricingModel: free
+    features:
+      - Full Pelias geocoding engine
+      - All API endpoints (search, reverse, autocomplete, structured, place)
+      - Supports OpenStreetMap, OpenAddresses, Who's on First, Geonames importers
+      - No rate limits (self-managed)
+      - MIT license — can modify and redistribute
+      - Docker Compose setup available
+      - Requires Elasticsearch cluster
+
+  - name: Geocode Earth Lite (Hosted)
+    description: Entry-level hosted Pelias API tier via Geocode Earth, the commercial hosting service built by the original Pelias creators.
+    url: https://geocode.earth
+    price: "$100/month"
+    pricingModel: subscription
+    features:
+      - 150,000 requests per month
+      - 10 requests per second rate limit
+      - All geocoding endpoints
+      - Two-week free trial, no credit card required
+      - Store geocoded results indefinitely
+      - No vendor lock-in
+      - Data privacy guaranteed
+
+  - name: Geocode Earth Basic (Hosted)
+    description: Mid-tier hosted Pelias API plan for growing applications via Geocode Earth.
+    url: https://geocode.earth
+    price: "$200/month"
+    pricingModel: subscription
+    features:
+      - 400,000 requests per month
+      - 10 requests per second rate limit
+      - All geocoding endpoints
+      - Two-week free trial, no credit card required
+      - Store geocoded results indefinitely
+      - No vendor lock-in
+      - Data privacy guaranteed
+
+  - name: Geocode Earth Advanced (Hosted)
+    description: High-volume hosted Pelias API plan for production applications via Geocode Earth.
+    url: https://geocode.earth
+    price: "$500/month"
+    pricingModel: subscription
+    features:
+      - 2,000,000 requests per month
+      - 20 requests per second rate limit
+      - All geocoding endpoints
+      - Two-week free trial, no credit card required
+      - Store geocoded results indefinitely
+      - No vendor lock-in
+      - Data privacy guaranteed
+
+  - name: Geocode Earth Custom (Hosted)
+    description: Enterprise hosted Pelias API plan for very high volume or custom requirements via Geocode Earth.
+    url: https://geocode.earth
+    price: Contact for pricing
+    pricingModel: custom
+    features:
+      - 50+ million requests per month
+      - Negotiable rate limits
+      - All geocoding endpoints
+      - Dedicated infrastructure options
+      - Custom SLA available
+      - Data privacy guaranteed
+      - Open-source and non-profit discounts available

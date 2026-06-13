@@ -1,0 +1,54 @@
+rateLimits:
+  - plan: Self-Hosted (Open Source)
+    description: No enforced rate limits when self-hosting. Limits are determined by your own Elasticsearch cluster capacity and infrastructure resources.
+    requestsPerSecond: unlimited
+    requestsPerMonth: unlimited
+    notes: Rate limiting must be implemented at the infrastructure or reverse proxy level if needed.
+
+  - plan: Geocode Earth Lite
+    description: Rate limits for the entry-level hosted Geocode Earth tier (commercial Pelias hosting).
+    url: https://geocode.earth
+    requestsPerSecond: 10
+    requestsPerMonth: 150000
+    notes: Two-week free trial available. Overage behavior is determined by Geocode Earth's billing policy.
+
+  - plan: Geocode Earth Basic
+    description: Rate limits for the mid-tier hosted Geocode Earth plan.
+    url: https://geocode.earth
+    requestsPerSecond: 10
+    requestsPerMonth: 400000
+    notes: Two-week free trial available.
+
+  - plan: Geocode Earth Advanced
+    description: Rate limits for the high-volume hosted Geocode Earth plan.
+    url: https://geocode.earth
+    requestsPerSecond: 20
+    requestsPerMonth: 2000000
+    notes: Two-week free trial available.
+
+  - plan: Geocode Earth Custom
+    description: Negotiable rate limits for enterprise hosted Geocode Earth plans.
+    url: https://geocode.earth
+    requestsPerSecond: negotiable
+    requestsPerMonth: 50000000+
+    notes: Contact Geocode Earth sales for custom rate limit arrangements.
+
+httpStatusCodes:
+  - code: 200
+    meaning: The request has succeeded. Response body is valid GeoJSON.
+  - code: 400
+    meaning: An input parameter was invalid. An error message is included in the response body with more details.
+  - code: 404
+    meaning: The URL is invalid or the path is no longer valid.
+  - code: 408
+    meaning: The Elasticsearch cluster took too long to respond.
+  - code: 500
+    meaning: Generic fatal error.
+  - code: 502
+    meaning: Connection was lost to the Elasticsearch cluster.
+
+notes: >
+  Pelias is a self-hosted open-source geocoder; rate limits depend on deployment
+  configuration. The hosted Geocode Earth service (geocode.earth), built by the
+  original Pelias maintainers, enforces the rate limits listed above. All API
+  responses are returned as valid GeoJSON regardless of status code.
