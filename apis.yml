@@ -50,6 +50,8 @@ apis:
         X-github: https://github.com/pelias
         X-gitter: https://gitter.im/pelias/pelias
 common:
+  - type: DomainSecurity
+    url: security/pelias-domain-security.yml
   - type: Website
     url: https://pelias.io
   - type: Documentation
