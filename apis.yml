@@ -50,6 +50,8 @@ apis:
         X-github: https://github.com/pelias
         X-gitter: https://gitter.im/pelias/pelias
 common:
+  - type: AgenticAccess
+    url: agentic-access/pelias-agentic-access.yml
   - type: DomainSecurity
     url: security/pelias-domain-security.yml
   - type: Website
