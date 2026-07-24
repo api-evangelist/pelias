@@ -1,0 +1,313 @@
+openapi: 3.0.3
+info:
+  title: Pelias Geocoding Autocomplete Place Lookup API
+  description: 'Pelias is a modular, open-source geocoding search engine built on Elasticsearch. It converts addresses and place names into geographic coordinates (forward geocoding) and geographic coordinates into places and addresses (reverse geocoding). Powered entirely by open data from OpenStreetMap, OpenAddresses, Who''s on First, and Geonames, it is freely available under the MIT license and can be self-hosted or accessed via hosted services such as geocode.earth.
+
+    '
+  version: '1.0'
+  license:
+    name: MIT
+    url: https://github.com/pelias/pelias/blob/master/LICENSE
+  contact:
+    name: Pelias Team
+    email: team@pelias.io
+    url: https://github.com/pelias
+  x-github-org: https://github.com/pelias
+  x-documentation: https://github.com/pelias/documentation
+servers:
+- url: https://api.geocode.earth/v1
+  description: Geocode.earth hosted Pelias service
+- url: http://localhost:3100/v1
+  description: Self-hosted local Pelias instance
+tags:
+- name: Place Lookup
+  description: Retrieve details for a known place by ID
+paths:
+  /place:
+    get:
+      operationId: lookupPlace
+      summary: Look up place details by Pelias GID
+      description: 'Returns details for one or more places identified by their Pelias Global Identifier (gid). GIDs are returned in search/autocomplete/reverse results and should not be constructed manually. Note that GeoNames and Who''s on First have stable IDs; OpenAddresses and OpenStreetMap IDs may change across data imports.
+
+        '
+      tags:
+      - Place Lookup
+      parameters:
+      - name: ids
+        in: query
+        required: true
+        description: 'Comma-separated list of Pelias gid values (e.g. openstreetmap:venue:way/5013364,whosonfirst:borough:421205771)
+
+          '
+        schema:
+          type: string
+        example: openstreetmap:venue:way/5013364
+      - name: categories
+        in: query
+        description: When present, includes category metadata in the response
+        schema:
+          type: boolean
+        allowEmptyValue: true
+      responses:
+        '200':
+          description: GeoJSON FeatureCollection with place details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeocodingResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+components:
+  schemas:
+    GeocodingResponse:
+      type: object
+      description: GeoJSON FeatureCollection returned by all Pelias endpoints
+      required:
+      - geocoding
+      - type
+      - features
+      properties:
+        geocoding:
+          $ref: '#/components/schemas/GeocodingMetadata'
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+          description: GeoJSON type identifier
+        features:
+          type: array
+          description: List of matched place features
+          items:
+            $ref: '#/components/schemas/GeocodingFeature'
+        bbox:
+          type: array
+          description: Bounding box of all results [minLon, minLat, maxLon, maxLat]
+          items:
+            type: number
+          minItems: 4
+          maxItems: 4
+    ErrorResponse:
+      type: object
+      description: Error response from the Pelias API
+      properties:
+        geocoding:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: string
+              example:
+              - '''text'' parameter is required'
+            query:
+              type: object
+              additionalProperties: true
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+        features:
+          type: array
+          items: {}
+    GeocodingMetadata:
+      type: object
+      description: Metadata about the geocoding request and response
+      properties:
+        version:
+          type: string
+          description: Pelias API version
+          example: '1.0'
+        attribution:
+          type: string
+          description: Attribution URL for the geocoding service
+          example: https://geocode.earth/guidelines
+        query:
+          type: object
+          description: Parsed query parameters
+          additionalProperties: true
+        engine:
+          type: object
+          description: Engine version information
+          properties:
+            name:
+              type: string
+              example: Pelias
+            author:
+              type: string
+              example: Mapzen
+            version:
+              type: string
+              example: '1.0'
+        timestamp:
+          type: integer
+          description: Unix timestamp of the response (milliseconds)
+          example: 1525718151924
+    GeocodingFeature:
+      type: object
+      description: A GeoJSON Feature representing a geocoded place
+      required:
+      - type
+      - geometry
+      - properties
+      properties:
+        type:
+          type: string
+          enum:
+          - Feature
+        geometry:
+          type: object
+          description: GeoJSON Point geometry (coordinates are [longitude, latitude])
+          required:
+          - type
+          - coordinates
+          properties:
+            type:
+              type: string
+              enum:
+              - Point
+            coordinates:
+              type: array
+              description: '[longitude, latitude] in decimal degrees'
+              items:
+                type: number
+              minItems: 2
+              maxItems: 2
+        properties:
+          $ref: '#/components/schemas/PlaceProperties'
+        bbox:
+          type: array
+          description: Feature-level bounding box [minLon, minLat, maxLon, maxLat]
+          items:
+            type: number
+          minItems: 4
+          maxItems: 4
+    PlaceProperties:
+      type: object
+      description: Properties of a geocoded place
+      properties:
+        id:
+          type: string
+          description: Source-specific record ID
+          example: '101750367'
+        gid:
+          type: string
+          description: Pelias Global Identifier (source:layer:id)
+          example: whosonfirst:locality:101750367
+        layer:
+          type: string
+          description: Data layer/type (venue, address, locality, country, etc.)
+          example: locality
+        source:
+          type: string
+          description: Data source name
+          example: whosonfirst
+        source_id:
+          type: string
+          description: ID within the original source dataset
+          example: '101750367'
+        name:
+          type: string
+          description: Short place name (business name, street address, locality, etc.)
+          example: London
+        label:
+          type: string
+          description: Human-friendly full label ready for display
+          example: London, England, United Kingdom
+        confidence:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Confidence score for this result (0–1)
+          example: 0.949
+        distance:
+          type: number
+          format: float
+          description: Distance in km from query point (reverse geocoding only)
+        country:
+          type: string
+          example: United Kingdom
+        country_gid:
+          type: string
+          example: whosonfirst:country:85633159
+        country_a:
+          type: string
+          description: ISO-3166 alpha-3 country code
+          example: GBR
+        macroregion:
+          type: string
+          example: England
+        macroregion_gid:
+          type: string
+          example: whosonfirst:macroregion:404227469
+        region:
+          type: string
+          example: City of Westminster
+        region_gid:
+          type: string
+          example: whosonfirst:region:85684061
+        region_a:
+          type: string
+          description: Region abbreviation
+          example: CA
+        county:
+          type: string
+          example: Maui
+        county_gid:
+          type: string
+        localadmin:
+          type: string
+        localadmin_gid:
+          type: string
+        locality:
+          type: string
+          example: London
+        locality_gid:
+          type: string
+          example: whosonfirst:locality:101750367
+        borough:
+          type: string
+          example: Manhattan
+        borough_gid:
+          type: string
+        neighbourhood:
+          type: string
+          example: Notting Hill
+        neighbourhood_gid:
+          type: string
+        postalcode:
+          type: string
+          example: '10001'
+        housenumber:
+          type: string
+          example: '30'
+        street:
+          type: string
+          example: West 26th Street
+        categories:
+          type: array
+          description: Place categories (returned when categories parameter is present on /place)
+          items:
+            type: string
+          example:
+          - entertainment
+        addendum:
+          type: object
+          description: Additional source-specific metadata
+          additionalProperties: true
+  responses:
+    BadRequest:
+      description: Bad request — missing or invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            geocoding:
+              errors:
+              - '''text'' parameter is required'
+            type: FeatureCollection
+            features: []
+externalDocs:
+  description: Pelias Documentation
+  url: https://github.com/pelias/documentation
