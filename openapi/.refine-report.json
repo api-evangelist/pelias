@@ -1,0 +1,20 @@
+{
+  "provider": "pelias",
+  "sources": [
+    "pelias-autocomplete-api-openapi.yml",
+    "pelias-forward-geocoding-api-openapi.yml",
+    "pelias-place-lookup-api-openapi.yml",
+    "pelias-reverse-geocoding-api-openapi.yml"
+  ],
+  "outputs": [
+    "pelias-autocomplete-api-openapi.yml",
+    "pelias-forward-geocoding-api-openapi.yml",
+    "pelias-place-lookup-api-openapi.yml",
+    "pelias-reverse-geocoding-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
