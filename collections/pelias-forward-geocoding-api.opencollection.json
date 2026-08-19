@@ -1,0 +1,254 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pelias Geocoding Autocomplete Forward Geocoding API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Forward Geocoding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Forward geocode a free-form text query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.geocode.earth/v1/search",
+            "params": [
+              {
+                "name": "text",
+                "value": "YMCA",
+                "type": "query",
+                "description": "Free-form text to geocode (addresses, place names, etc.)"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of results to return (default 10, max 40)"
+              },
+              {
+                "name": "lang",
+                "value": "en",
+                "type": "query",
+                "description": "BCP47 language tag for preferred response language (e.g. en, fr, de). Not all places have translated names.\n"
+              },
+              {
+                "name": "focus.point.lat",
+                "value": "37.7749",
+                "type": "query",
+                "description": "Latitude of the focus point to boost nearby results"
+              },
+              {
+                "name": "focus.point.lon",
+                "value": "-122.4194",
+                "type": "query",
+                "description": "Longitude of the focus point to boost nearby results"
+              },
+              {
+                "name": "boundary.rect.min_lon",
+                "value": "",
+                "type": "query",
+                "description": "Minimum longitude of rectangular boundary (western edge)"
+              },
+              {
+                "name": "boundary.rect.max_lon",
+                "value": "",
+                "type": "query",
+                "description": "Maximum longitude of rectangular boundary (eastern edge)"
+              },
+              {
+                "name": "boundary.rect.min_lat",
+                "value": "",
+                "type": "query",
+                "description": "Minimum latitude of rectangular boundary (southern edge)"
+              },
+              {
+                "name": "boundary.rect.max_lat",
+                "value": "",
+                "type": "query",
+                "description": "Maximum latitude of rectangular boundary (northern edge)"
+              },
+              {
+                "name": "boundary.circle.lat",
+                "value": "",
+                "type": "query",
+                "description": "Latitude of the center of a circular boundary"
+              },
+              {
+                "name": "boundary.circle.lon",
+                "value": "",
+                "type": "query",
+                "description": "Longitude of the center of a circular boundary"
+              },
+              {
+                "name": "boundary.circle.radius",
+                "value": "",
+                "type": "query",
+                "description": "Radius in km of the circular boundary"
+              },
+              {
+                "name": "boundary.country",
+                "value": "GBR",
+                "type": "query",
+                "description": "Comma-separated list of ISO-3166 alpha-2 or alpha-3 country codes to restrict results\n"
+              },
+              {
+                "name": "boundary.gid",
+                "value": "whosonfirst:locality:101748355",
+                "type": "query",
+                "description": "Pelias gid of an administrative area to restrict results within"
+              },
+              {
+                "name": "sources",
+                "value": "osm",
+                "type": "query",
+                "description": "Comma-separated list of data sources to query. Valid values: openstreetmap (osm), openaddresses (oa), whosonfirst (wof), geonames (gn)\n"
+              },
+              {
+                "name": "layers",
+                "value": "address,locality",
+                "type": "query",
+                "description": "Comma-separated list of layer types to restrict results. Valid values: venue, address, street, neighbourhood, borough, localadmin, locality, county, macrocounty, region, macroregion, country, coarse, postalcode\n"
+              }
+            ]
+          },
+          "docs": "Search for places by free-form text. Returns up to 10 GeoJSON features by default. Supports filtering by data source, layer, bounding box, circle, and country.\n"
+        },
+        {
+          "info": {
+            "name": "Forward geocode using structured address components",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.geocode.earth/v1/search/structured",
+            "params": [
+              {
+                "name": "address",
+                "value": "30 West 26th Street",
+                "type": "query",
+                "description": "Street address with optional house number"
+              },
+              {
+                "name": "neighbourhood",
+                "value": "Notting Hill",
+                "type": "query",
+                "description": "Neighbourhood name (vernacular geographic entity)"
+              },
+              {
+                "name": "borough",
+                "value": "Manhattan",
+                "type": "query",
+                "description": "Borough name (sub-locality division)"
+              },
+              {
+                "name": "locality",
+                "value": "New York",
+                "type": "query",
+                "description": "City or locality name"
+              },
+              {
+                "name": "county",
+                "value": "Bucks",
+                "type": "query",
+                "description": "County or administrative division between locality and region"
+              },
+              {
+                "name": "region",
+                "value": "NY",
+                "type": "query",
+                "description": "State, province, or first-level administrative division"
+              },
+              {
+                "name": "postalcode",
+                "value": "10001",
+                "type": "query",
+                "description": "Postal or ZIP code"
+              },
+              {
+                "name": "country",
+                "value": "US",
+                "type": "query",
+                "description": "Country name or ISO-3166 alpha-2/alpha-3 code"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of results to return (default 10, max 40)"
+              },
+              {
+                "name": "lang",
+                "value": "en",
+                "type": "query",
+                "description": "BCP47 language tag for preferred response language (e.g. en, fr, de). Not all places have translated names.\n"
+              },
+              {
+                "name": "focus.point.lat",
+                "value": "37.7749",
+                "type": "query",
+                "description": "Latitude of the focus point to boost nearby results"
+              },
+              {
+                "name": "focus.point.lon",
+                "value": "-122.4194",
+                "type": "query",
+                "description": "Longitude of the focus point to boost nearby results"
+              },
+              {
+                "name": "boundary.rect.min_lon",
+                "value": "",
+                "type": "query",
+                "description": "Minimum longitude of rectangular boundary (western edge)"
+              },
+              {
+                "name": "boundary.rect.max_lon",
+                "value": "",
+                "type": "query",
+                "description": "Maximum longitude of rectangular boundary (eastern edge)"
+              },
+              {
+                "name": "boundary.rect.min_lat",
+                "value": "",
+                "type": "query",
+                "description": "Minimum latitude of rectangular boundary (southern edge)"
+              },
+              {
+                "name": "boundary.rect.max_lat",
+                "value": "",
+                "type": "query",
+                "description": "Maximum latitude of rectangular boundary (northern edge)"
+              },
+              {
+                "name": "boundary.country",
+                "value": "GBR",
+                "type": "query",
+                "description": "Comma-separated list of ISO-3166 alpha-2 or alpha-3 country codes to restrict results\n"
+              },
+              {
+                "name": "sources",
+                "value": "osm",
+                "type": "query",
+                "description": "Comma-separated list of data sources to query. Valid values: openstreetmap (osm), openaddresses (oa), whosonfirst (wof), geonames (gn)\n"
+              },
+              {
+                "name": "layers",
+                "value": "address,locality",
+                "type": "query",
+                "description": "Comma-separated list of layer types to restrict results. Valid values: venue, address, street, neighbourhood, borough, localadmin, locality, county, macrocounty, region, macroregion, country, coarse, postalcode\n"
+              }
+            ]
+          },
+          "docs": "Search for places by providing individual address components (address, neighbourhood, borough, locality, county, region, postalcode, country). Reduces ambiguity compared to free-form text search. Currently in beta.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

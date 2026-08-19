@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pelias Geocoding Autocomplete Place Lookup API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Place Lookup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Look up place details by Pelias GID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.geocode.earth/v1/place",
+            "params": [
+              {
+                "name": "ids",
+                "value": "openstreetmap:venue:way/5013364",
+                "type": "query",
+                "description": "Comma-separated list of Pelias gid values (e.g. openstreetmap:venue:way/5013364,whosonfirst:borough:421205771)\n"
+              },
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query",
+                "description": "When present, includes category metadata in the response"
+              }
+            ]
+          },
+          "docs": "Returns details for one or more places identified by their Pelias Global Identifier (gid). GIDs are returned in search/autocomplete/reverse results and should not be constructed manually. Note that GeoNames and Who's on First have stable IDs; OpenAddresses and OpenStreetMap IDs may change across data imports.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

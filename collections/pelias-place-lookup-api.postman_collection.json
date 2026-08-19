@@ -1,0 +1,168 @@
+{
+  "item": [
+    {
+      "id": "7661a352-7cfc-465b-acea-43982b61be7d",
+      "name": "Place Lookup",
+      "description": {
+        "content": "Retrieve details for a known place by ID",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "748bd2de-9853-415c-98f0-89177cc9dbc8",
+          "name": "Look up place details by Pelias GID",
+          "request": {
+            "name": "Look up place details by Pelias GID",
+            "description": {
+              "content": "Returns details for one or more places identified by their Pelias Global Identifier (gid). GIDs are returned in search/autocomplete/reverse results and should not be constructed manually. Note that GeoNames and Who's on First have stable IDs; OpenAddresses and OpenStreetMap IDs may change across data imports.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "place"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of Pelias gid values (e.g. openstreetmap:venue:way/5013364,whosonfirst:borough:421205771)\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<boolean>",
+                  "description": "When present, includes category metadata in the response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8036c0c-069a-4130-a976-8f07778df769",
+              "name": "GeoJSON FeatureCollection with place details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "openstreetmap:venue:way/5013364"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"geocoding\": {\n    \"version\": \"1.0\",\n    \"attribution\": \"https://geocode.earth/guidelines\",\n    \"query\": {\n      \"key_0\": 5989.067214568404,\n      \"key_1\": false\n    },\n    \"engine\": {\n      \"name\": \"Pelias\",\n      \"author\": \"Mapzen\",\n      \"version\": \"1.0\"\n    },\n    \"timestamp\": 1525718151924\n  },\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          217.60985132799783,\n          447.1090847950998\n        ]\n      },\n      \"properties\": {\n        \"id\": \"101750367\",\n        \"gid\": \"whosonfirst:locality:101750367\",\n        \"layer\": \"locality\",\n        \"source\": \"whosonfirst\",\n        \"source_id\": \"101750367\",\n        \"name\": \"London\",\n        \"label\": \"London, England, United Kingdom\",\n        \"confidence\": 0.949,\n        \"distance\": 4448.344260933676,\n        \"country\": \"United Kingdom\",\n        \"country_gid\": \"whosonfirst:country:85633159\",\n        \"country_a\": \"GBR\",\n        \"macroregion\": \"England\",\n        \"macroregion_gid\": \"whosonfirst:macroregion:404227469\",\n        \"region\": \"City of Westminster\",\n        \"region_gid\": \"whosonfirst:region:85684061\",\n        \"region_a\": \"CA\",\n        \"county\": \"Maui\",\n        \"county_gid\": \"string\",\n        \"localadmin\": \"string\",\n        \"localadmin_gid\": \"string\",\n        \"locality\": \"London\",\n        \"locality_gid\": \"whosonfirst:locality:101750367\",\n        \"borough\": \"Manhattan\",\n        \"borough_gid\": \"string\",\n        \"neighbourhood\": \"Notting Hill\",\n        \"neighbourhood_gid\": \"string\",\n        \"postalcode\": \"10001\",\n        \"housenumber\": \"30\",\n        \"street\": \"West 26th Street\",\n        \"categories\": [\n          \"entertainment\"\n        ],\n        \"addendum\": {\n          \"key_0\": \"string\",\n          \"key_1\": true,\n          \"key_2\": 95.27510371223791,\n          \"key_3\": false\n        }\n      },\n      \"bbox\": [\n        3242.2457178492705,\n        6509.156169356826,\n        2218.411043340599,\n        2854.8507949402933\n      ]\n    },\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          7713.172237557388,\n          34.57041473490796\n        ]\n      },\n      \"properties\": {\n        \"id\": \"101750367\",\n        \"gid\": \"whosonfirst:locality:101750367\",\n        \"layer\": \"locality\",\n        \"source\": \"whosonfirst\",\n        \"source_id\": \"101750367\",\n        \"name\": \"London\",\n        \"label\": \"London, England, United Kingdom\",\n        \"confidence\": 0.949,\n        \"distance\": 1527.824719221159,\n        \"country\": \"United Kingdom\",\n        \"country_gid\": \"whosonfirst:country:85633159\",\n        \"country_a\": \"GBR\",\n        \"macroregion\": \"England\",\n        \"macroregion_gid\": \"whosonfirst:macroregion:404227469\",\n        \"region\": \"City of Westminster\",\n        \"region_gid\": \"whosonfirst:region:85684061\",\n        \"region_a\": \"CA\",\n        \"county\": \"Maui\",\n        \"county_gid\": \"string\",\n        \"localadmin\": \"string\",\n        \"localadmin_gid\": \"string\",\n        \"locality\": \"London\",\n        \"locality_gid\": \"whosonfirst:locality:101750367\",\n        \"borough\": \"Manhattan\",\n        \"borough_gid\": \"string\",\n        \"neighbourhood\": \"Notting Hill\",\n        \"neighbourhood_gid\": \"string\",\n        \"postalcode\": \"10001\",\n        \"housenumber\": \"30\",\n        \"street\": \"West 26th Street\",\n        \"categories\": [\n          \"entertainment\"\n        ],\n        \"addendum\": {\n          \"key_0\": false\n        }\n      },\n      \"bbox\": [\n        103.50523902084463,\n        3742.8208154256236,\n        9389.889287098915,\n        2081.3632301339126\n      ]\n    }\n  ],\n  \"bbox\": [\n    5500.132751203892,\n    492.27166618014627,\n    7428.8731411071,\n    1846.5763820112968\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f84c8c7-9762-43af-851a-9838b668ac55",
+              "name": "Bad request — missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "place"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "openstreetmap:venue:way/5013364"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"geocoding\": {\n    \"errors\": [\n      \"'text' parameter is required\"\n    ]\n  },\n  \"type\": \"FeatureCollection\",\n  \"features\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.geocode.earth/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bd6c4a0f-e339-480a-b1c9-7d0aecfcc794",
+    "name": "Pelias Geocoding Autocomplete Place Lookup API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Pelias is a modular, open-source geocoding search engine built on Elasticsearch. It converts addresses and place names into geographic coordinates (forward geocoding) and geographic coordinates into places and addresses (reverse geocoding). Powered entirely by open data from OpenStreetMap, OpenAddresses, Who's on First, and Geonames, it is freely available under the MIT license and can be self-hosted or accessed via hosted services such as geocode.earth.\n\n\nContact Support:\n Name: Pelias Team\n Email: team@pelias.io",
+      "type": "text/plain"
+    }
+  }
+}

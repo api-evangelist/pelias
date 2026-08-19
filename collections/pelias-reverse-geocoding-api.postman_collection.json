@@ -1,0 +1,266 @@
+{
+  "item": [
+    {
+      "id": "7cd866b9-0e8a-45a2-a9d5-07080a8d6583",
+      "name": "Reverse Geocoding",
+      "description": {
+        "content": "Convert geographic coordinates into places and addresses",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ce2adfe5-1706-42b7-a64c-ade592e07fd9",
+          "name": "Reverse geocode coordinates into place/address",
+          "request": {
+            "name": "Reverse geocode coordinates into place/address",
+            "description": {
+              "content": "Given a latitude and longitude, returns the nearest places and addresses from all available data sources. Optionally filter by source, layer, or boundary.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reverse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "point.lat",
+                  "value": "<float>",
+                  "description": "(Required) Latitude of the point to reverse geocode (decimal degrees)"
+                },
+                {
+                  "disabled": false,
+                  "key": "point.lon",
+                  "value": "<float>",
+                  "description": "(Required) Longitude of the point to reverse geocode (decimal degrees)"
+                },
+                {
+                  "disabled": false,
+                  "key": "boundary.circle.radius",
+                  "value": "<float>",
+                  "description": "Radius in km within which to restrict results (max 5)"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "Maximum number of results to return (default 10, max 40)"
+                },
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "<string>",
+                  "description": "BCP47 language tag for preferred response language (e.g. en, fr, de). Not all places have translated names.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "boundary.country",
+                  "value": "<string>",
+                  "description": "Comma-separated list of ISO-3166 alpha-2 or alpha-3 country codes to restrict results\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "boundary.gid",
+                  "value": "<string>",
+                  "description": "Pelias gid of an administrative area to restrict results within"
+                },
+                {
+                  "disabled": false,
+                  "key": "sources",
+                  "value": "<string>",
+                  "description": "Comma-separated list of data sources to query. Valid values: openstreetmap (osm), openaddresses (oa), whosonfirst (wof), geonames (gn)\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "layers",
+                  "value": "<string>",
+                  "description": "Comma-separated list of layer types to restrict results. Valid values: venue, address, street, neighbourhood, borough, localadmin, locality, county, macrocounty, region, macroregion, country, coarse, postalcode\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb6569ec-f277-4c96-9e59-e63ee5d3f78b",
+              "name": "GeoJSON FeatureCollection of reverse geocoding results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "point.lat",
+                      "value": "48.858268"
+                    },
+                    {
+                      "key": "point.lon",
+                      "value": "2.294471"
+                    },
+                    {
+                      "key": "boundary.circle.radius",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "boundary.country",
+                      "value": "GBR"
+                    },
+                    {
+                      "key": "boundary.gid",
+                      "value": "whosonfirst:locality:101748355"
+                    },
+                    {
+                      "key": "sources",
+                      "value": "osm"
+                    },
+                    {
+                      "key": "layers",
+                      "value": "address,locality"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"geocoding\": {\n    \"version\": \"1.0\",\n    \"attribution\": \"https://geocode.earth/guidelines\",\n    \"query\": {\n      \"point.lat\": 48.858268,\n      \"point.lon\": 2.294471,\n      \"size\": 10\n    },\n    \"timestamp\": 1525718151924\n  },\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          2.294471,\n          48.858268\n        ]\n      },\n      \"properties\": {\n        \"id\": \"way/5013364\",\n        \"gid\": \"openstreetmap:venue:way/5013364\",\n        \"layer\": \"venue\",\n        \"source\": \"openstreetmap\",\n        \"name\": \"Tour Eiffel\",\n        \"confidence\": 0.9,\n        \"distance\": 0.001,\n        \"country\": \"France\",\n        \"country_a\": \"FRA\",\n        \"locality\": \"Paris\",\n        \"label\": \"Tour Eiffel, Paris, France\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f17e86b3-02cb-4572-9a54-648c728dc9ff",
+              "name": "Bad request — missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "point.lat",
+                      "value": "48.858268"
+                    },
+                    {
+                      "key": "point.lon",
+                      "value": "2.294471"
+                    },
+                    {
+                      "key": "boundary.circle.radius",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "boundary.country",
+                      "value": "GBR"
+                    },
+                    {
+                      "key": "boundary.gid",
+                      "value": "whosonfirst:locality:101748355"
+                    },
+                    {
+                      "key": "sources",
+                      "value": "osm"
+                    },
+                    {
+                      "key": "layers",
+                      "value": "address,locality"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"geocoding\": {\n    \"errors\": [\n      \"'text' parameter is required\"\n    ]\n  },\n  \"type\": \"FeatureCollection\",\n  \"features\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.geocode.earth/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "28ec12e6-3e1f-41d3-92b2-fa1c7d09e2df",
+    "name": "Pelias Geocoding Autocomplete Reverse Geocoding API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Pelias is a modular, open-source geocoding search engine built on Elasticsearch. It converts addresses and place names into geographic coordinates (forward geocoding) and geographic coordinates into places and addresses (reverse geocoding). Powered entirely by open data from OpenStreetMap, OpenAddresses, Who's on First, and Geonames, it is freely available under the MIT license and can be self-hosted or accessed via hosted services such as geocode.earth.\n\n\nContact Support:\n Name: Pelias Team\n Email: team@pelias.io",
+      "type": "text/plain"
+    }
+  }
+}

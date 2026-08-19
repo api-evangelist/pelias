@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pelias Geocoding Autocomplete Reverse Geocoding API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reverse Geocoding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Reverse geocode coordinates into place/address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.geocode.earth/v1/reverse",
+            "params": [
+              {
+                "name": "point.lat",
+                "value": "48.858268",
+                "type": "query",
+                "description": "Latitude of the point to reverse geocode (decimal degrees)"
+              },
+              {
+                "name": "point.lon",
+                "value": "2.294471",
+                "type": "query",
+                "description": "Longitude of the point to reverse geocode (decimal degrees)"
+              },
+              {
+                "name": "boundary.circle.radius",
+                "value": "1",
+                "type": "query",
+                "description": "Radius in km within which to restrict results (max 5)"
+              },
+              {
+                "name": "size",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of results to return (default 10, max 40)"
+              },
+              {
+                "name": "lang",
+                "value": "en",
+                "type": "query",
+                "description": "BCP47 language tag for preferred response language (e.g. en, fr, de). Not all places have translated names.\n"
+              },
+              {
+                "name": "boundary.country",
+                "value": "GBR",
+                "type": "query",
+                "description": "Comma-separated list of ISO-3166 alpha-2 or alpha-3 country codes to restrict results\n"
+              },
+              {
+                "name": "boundary.gid",
+                "value": "whosonfirst:locality:101748355",
+                "type": "query",
+                "description": "Pelias gid of an administrative area to restrict results within"
+              },
+              {
+                "name": "sources",
+                "value": "osm",
+                "type": "query",
+                "description": "Comma-separated list of data sources to query. Valid values: openstreetmap (osm), openaddresses (oa), whosonfirst (wof), geonames (gn)\n"
+              },
+              {
+                "name": "layers",
+                "value": "address,locality",
+                "type": "query",
+                "description": "Comma-separated list of layer types to restrict results. Valid values: venue, address, street, neighbourhood, borough, localadmin, locality, county, macrocounty, region, macroregion, country, coarse, postalcode\n"
+              }
+            ]
+          },
+          "docs": "Given a latitude and longitude, returns the nearest places and addresses from all available data sources. Optionally filter by source, layer, or boundary.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

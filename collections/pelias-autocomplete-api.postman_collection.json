@@ -1,0 +1,364 @@
+{
+  "item": [
+    {
+      "id": "798fe587-8581-4189-b4c1-4c75020bc2bb",
+      "name": "Autocomplete",
+      "description": {
+        "content": "Real-time type-ahead geocoding for user input",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a68f95bd-6767-4b2d-ba0a-79b1f5b1bec4",
+          "name": "Type-ahead autocomplete geocoding",
+          "request": {
+            "name": "Type-ahead autocomplete geocoding",
+            "description": {
+              "content": "Returns real-time geocoding suggestions as the user types. Best used with client-side throttling (5–10 requests per second). Results include GeoJSON features ranked by relevance and optional geographic focus.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "autocomplete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "text",
+                  "value": "<string>",
+                  "description": "(Required) Free-form text to geocode (addresses, place names, etc.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "10",
+                  "description": "Maximum number of results to return (default 10, max 40)"
+                },
+                {
+                  "disabled": false,
+                  "key": "lang",
+                  "value": "<string>",
+                  "description": "BCP47 language tag for preferred response language (e.g. en, fr, de). Not all places have translated names.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "focus.point.lat",
+                  "value": "<float>",
+                  "description": "Latitude of the focus point to boost nearby results"
+                },
+                {
+                  "disabled": false,
+                  "key": "focus.point.lon",
+                  "value": "<float>",
+                  "description": "Longitude of the focus point to boost nearby results"
+                },
+                {
+                  "disabled": false,
+                  "key": "boundary.rect.min_lon",
+                  "value": "<float>",
+                  "description": "Minimum longitude of rectangular boundary (western edge)"
+                },
+                {
+                  "disabled": false,
+                  "key": "boundary.rect.max_lon",
+                  "value": "<float>",
+                  "description": "Maximum longitude of rectangular boundary (eastern edge)"
+                },
+                {
+                  "disabled": false,
+                  "key": "boundary.rect.min_lat",
+                  "value": "<float>",
+                  "description": "Minimum latitude of rectangular boundary (southern edge)"
+                },
+                {
+                  "disabled": false,
+                  "key": "boundary.rect.max_lat",
+                  "value": "<float>",
+                  "description": "Maximum latitude of rectangular boundary (northern edge)"
+                },
+                {
+                  "disabled": false,
+                  "key": "boundary.circle.lat",
+                  "value": "<float>",
+                  "description": "Latitude of the center of a circular boundary"
+                },
+                {
+                  "disabled": false,
+                  "key": "boundary.circle.lon",
+                  "value": "<float>",
+                  "description": "Longitude of the center of a circular boundary"
+                },
+                {
+                  "disabled": false,
+                  "key": "boundary.circle.radius",
+                  "value": "<float>",
+                  "description": "Radius in km of the circular boundary"
+                },
+                {
+                  "disabled": false,
+                  "key": "boundary.country",
+                  "value": "<string>",
+                  "description": "Comma-separated list of ISO-3166 alpha-2 or alpha-3 country codes to restrict results\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "boundary.gid",
+                  "value": "<string>",
+                  "description": "Pelias gid of an administrative area to restrict results within"
+                },
+                {
+                  "disabled": false,
+                  "key": "sources",
+                  "value": "<string>",
+                  "description": "Comma-separated list of data sources to query. Valid values: openstreetmap (osm), openaddresses (oa), whosonfirst (wof), geonames (gn)\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "layers",
+                  "value": "<string>",
+                  "description": "Comma-separated list of layer types to restrict results. Valid values: venue, address, street, neighbourhood, borough, localadmin, locality, county, macrocounty, region, macroregion, country, coarse, postalcode\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1d58925-18fb-4b37-9551-1d50c544d148",
+              "name": "GeoJSON FeatureCollection of autocomplete suggestions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "autocomplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text",
+                      "value": "YMCA"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "focus.point.lat",
+                      "value": "37.7749"
+                    },
+                    {
+                      "key": "focus.point.lon",
+                      "value": "-122.4194"
+                    },
+                    {
+                      "key": "boundary.rect.min_lon",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "boundary.rect.max_lon",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "boundary.rect.min_lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "boundary.rect.max_lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "boundary.circle.lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "boundary.circle.lon",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "boundary.circle.radius",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "boundary.country",
+                      "value": "GBR"
+                    },
+                    {
+                      "key": "boundary.gid",
+                      "value": "whosonfirst:locality:101748355"
+                    },
+                    {
+                      "key": "sources",
+                      "value": "osm"
+                    },
+                    {
+                      "key": "layers",
+                      "value": "address,locality"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"geocoding\": {\n    \"version\": \"1.0\",\n    \"attribution\": \"https://geocode.earth/guidelines\",\n    \"query\": {\n      \"key_0\": \"string\",\n      \"key_1\": 3952,\n      \"key_2\": 2281.245424814673\n    },\n    \"engine\": {\n      \"name\": \"Pelias\",\n      \"author\": \"Mapzen\",\n      \"version\": \"1.0\"\n    },\n    \"timestamp\": 1525718151924\n  },\n  \"type\": \"FeatureCollection\",\n  \"features\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          7395.021684837626,\n          6944.067065434675\n        ]\n      },\n      \"properties\": {\n        \"id\": \"101750367\",\n        \"gid\": \"whosonfirst:locality:101750367\",\n        \"layer\": \"locality\",\n        \"source\": \"whosonfirst\",\n        \"source_id\": \"101750367\",\n        \"name\": \"London\",\n        \"label\": \"London, England, United Kingdom\",\n        \"confidence\": 0.949,\n        \"distance\": 7753.259962759987,\n        \"country\": \"United Kingdom\",\n        \"country_gid\": \"whosonfirst:country:85633159\",\n        \"country_a\": \"GBR\",\n        \"macroregion\": \"England\",\n        \"macroregion_gid\": \"whosonfirst:macroregion:404227469\",\n        \"region\": \"City of Westminster\",\n        \"region_gid\": \"whosonfirst:region:85684061\",\n        \"region_a\": \"CA\",\n        \"county\": \"Maui\",\n        \"county_gid\": \"string\",\n        \"localadmin\": \"string\",\n        \"localadmin_gid\": \"string\",\n        \"locality\": \"London\",\n        \"locality_gid\": \"whosonfirst:locality:101750367\",\n        \"borough\": \"Manhattan\",\n        \"borough_gid\": \"string\",\n        \"neighbourhood\": \"Notting Hill\",\n        \"neighbourhood_gid\": \"string\",\n        \"postalcode\": \"10001\",\n        \"housenumber\": \"30\",\n        \"street\": \"West 26th Street\",\n        \"categories\": [\n          \"entertainment\"\n        ],\n        \"addendum\": {\n          \"key_0\": 8508,\n          \"key_1\": false\n        }\n      },\n      \"bbox\": [\n        5312.798559338493,\n        7119.809437883404,\n        241.85952107452002,\n        2791.02929633943\n      ]\n    },\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          9484.366765517343,\n          615.3125516803781\n        ]\n      },\n      \"properties\": {\n        \"id\": \"101750367\",\n        \"gid\": \"whosonfirst:locality:101750367\",\n        \"layer\": \"locality\",\n        \"source\": \"whosonfirst\",\n        \"source_id\": \"101750367\",\n        \"name\": \"London\",\n        \"label\": \"London, England, United Kingdom\",\n        \"confidence\": 0.949,\n        \"distance\": 3140.0530606777043,\n        \"country\": \"United Kingdom\",\n        \"country_gid\": \"whosonfirst:country:85633159\",\n        \"country_a\": \"GBR\",\n        \"macroregion\": \"England\",\n        \"macroregion_gid\": \"whosonfirst:macroregion:404227469\",\n        \"region\": \"City of Westminster\",\n        \"region_gid\": \"whosonfirst:region:85684061\",\n        \"region_a\": \"CA\",\n        \"county\": \"Maui\",\n        \"county_gid\": \"string\",\n        \"localadmin\": \"string\",\n        \"localadmin_gid\": \"string\",\n        \"locality\": \"London\",\n        \"locality_gid\": \"whosonfirst:locality:101750367\",\n        \"borough\": \"Manhattan\",\n        \"borough_gid\": \"string\",\n        \"neighbourhood\": \"Notting Hill\",\n        \"neighbourhood_gid\": \"string\",\n        \"postalcode\": \"10001\",\n        \"housenumber\": \"30\",\n        \"street\": \"West 26th Street\",\n        \"categories\": [\n          \"entertainment\"\n        ],\n        \"addendum\": {\n          \"key_0\": 4135,\n          \"key_1\": false\n        }\n      },\n      \"bbox\": [\n        576.4283932824754,\n        6737.230612136737,\n        1438.9026824598484,\n        3106.2369208179043\n      ]\n    }\n  ],\n  \"bbox\": [\n    2603.614430307615,\n    6994.5047498924705,\n    6733.138670962781,\n    3718.013660462409\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd4b4be2-34fa-48b1-97b5-9a948e79f505",
+              "name": "Bad request — missing or invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "autocomplete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "text",
+                      "value": "YMCA"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "lang",
+                      "value": "en"
+                    },
+                    {
+                      "key": "focus.point.lat",
+                      "value": "37.7749"
+                    },
+                    {
+                      "key": "focus.point.lon",
+                      "value": "-122.4194"
+                    },
+                    {
+                      "key": "boundary.rect.min_lon",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "boundary.rect.max_lon",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "boundary.rect.min_lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "boundary.rect.max_lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "boundary.circle.lat",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "boundary.circle.lon",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "boundary.circle.radius",
+                      "value": "<float>"
+                    },
+                    {
+                      "key": "boundary.country",
+                      "value": "GBR"
+                    },
+                    {
+                      "key": "boundary.gid",
+                      "value": "whosonfirst:locality:101748355"
+                    },
+                    {
+                      "key": "sources",
+                      "value": "osm"
+                    },
+                    {
+                      "key": "layers",
+                      "value": "address,locality"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"geocoding\": {\n    \"errors\": [\n      \"'text' parameter is required\"\n    ]\n  },\n  \"type\": \"FeatureCollection\",\n  \"features\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.geocode.earth/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0bb45b46-a639-4ca2-b768-21f9840e4033",
+    "name": "Pelias Geocoding Autocomplete API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Pelias is a modular, open-source geocoding search engine built on Elasticsearch. It converts addresses and place names into geographic coordinates (forward geocoding) and geographic coordinates into places and addresses (reverse geocoding). Powered entirely by open data from OpenStreetMap, OpenAddresses, Who's on First, and Geonames, it is freely available under the MIT license and can be self-hosted or accessed via hosted services such as geocode.earth.\n\n\nContact Support:\n Name: Pelias Team\n Email: team@pelias.io",
+      "type": "text/plain"
+    }
+  }
+}
