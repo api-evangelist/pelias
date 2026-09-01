@@ -27,15 +27,15 @@ accessModel:
   method: derived
 image: https://pelias.io/images/pelias-logo.png
 tags:
-  - geocoding
-  - reverse geocoding
-  - geospatial
-  - open source
-  - elasticsearch
-  - openstreetmap
+  - Geocoding
+  - Reverse Geocoding
+  - Geospatial
+  - Open-Source
+  - Elasticsearch
+  - OpenStreetMap
   - Addresses
   - Places
-  - autocomplete
+  - Autocomplete
 tags_raw:
   - geocoding
   - reverse geocoding
