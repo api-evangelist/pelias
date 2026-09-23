@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Pelias Geocoding Autocomplete API
-  description: 'Pelias is a modular, open-source geocoding search engine built on Elasticsearch. It converts addresses and place names into geographic coordinates (forward geocoding) and geographic coordinates into places and addresses (reverse geocoding). Powered entirely by open data from OpenStreetMap, OpenAddresses, Who''s on First, and Geonames, it is freely available under the MIT license and can be self-hosted or accessed via hosted services such as geocode.earth.
-
-    '
+  description: Pelias is a modular, open-source geocoding search engine built on Elasticsearch. It converts addresses and place names into geographic coordinates (forward geocoding) and geographic coordinates into places and addresses (reverse geocoding). Powered entirely by open data from OpenStreetMap, OpenAddresses, Who's on First, and Geonames, it is freely available under the MIT license and can be self-hosted or accessed via hosted services such as geocode.earth.
   version: '1.0'
   license:
     name: MIT
@@ -27,9 +25,7 @@ paths:
     get:
       operationId: autocomplete
       summary: Type-ahead autocomplete geocoding
-      description: 'Returns real-time geocoding suggestions as the user types. Best used with client-side throttling (5–10 requests per second). Results include GeoJSON features ranked by relevance and optional geographic focus.
-
-        '
+      description: Returns real-time geocoding suggestions as the user types. Best used with client-side throttling (5–10 requests per second). Results include GeoJSON features ranked by relevance and optional geographic focus.
       tags:
       - Autocomplete
       parameters:
@@ -70,6 +66,29 @@ components:
         maximum: 40
         default: 10
       example: 10
+    boundary.circle.lon:
+      name: boundary.circle.lon
+      in: query
+      description: Longitude of the center of a circular boundary
+      schema:
+        type: number
+        format: float
+    boundary.country:
+      name: boundary.country
+      in: query
+      description: 'Comma-separated list of ISO-3166 alpha-2 or alpha-3 country codes to restrict results
+
+        '
+      schema:
+        type: string
+      example: GBR
+    boundary.rect.max_lat:
+      name: boundary.rect.max_lat
+      in: query
+      description: Maximum latitude of rectangular boundary (northern edge)
+      schema:
+        type: number
+        format: float
     sources:
       name: sources
       in: query
@@ -88,15 +107,20 @@ components:
         - geonames
         - gn
       example: osm
-    lang:
-      name: lang
+    boundary.rect.max_lon:
+      name: boundary.rect.max_lon
       in: query
-      description: 'BCP47 language tag for preferred response language (e.g. en, fr, de). Not all places have translated names.
-
-        '
+      description: Maximum longitude of rectangular boundary (eastern edge)
       schema:
-        type: string
-      example: en
+        type: number
+        format: float
+    boundary.rect.min_lon:
+      name: boundary.rect.min_lon
+      in: query
+      description: Minimum longitude of rectangular boundary (western edge)
+      schema:
+        type: number
+        format: float
     layers:
       name: layers
       in: query
@@ -113,20 +137,6 @@ components:
       schema:
         type: number
         format: float
-    boundary.gid:
-      name: boundary.gid
-      in: query
-      description: Pelias gid of an administrative area to restrict results within
-      schema:
-        type: string
-      example: whosonfirst:locality:101748355
-    boundary.rect.max_lat:
-      name: boundary.rect.max_lat
-      in: query
-      description: Maximum latitude of rectangular boundary (northern edge)
-      schema:
-        type: number
-        format: float
     focus.point.lon:
       name: focus.point.lon
       in: query
@@ -137,6 +147,39 @@ components:
         minimum: -180
         maximum: 180
       example: -122.4194
+    boundary.circle.lat:
+      name: boundary.circle.lat
+      in: query
+      description: Latitude of the center of a circular boundary
+      schema:
+        type: number
+        format: float
+    boundary.gid:
+      name: boundary.gid
+      in: query
+      description: Pelias gid of an administrative area to restrict results within
+      schema:
+        type: string
+      example: whosonfirst:locality:101748355
+    focus.point.lat:
+      name: focus.point.lat
+      in: query
+      description: Latitude of the focus point to boost nearby results
+      schema:
+        type: number
+        format: float
+        minimum: -90
+        maximum: 90
+      example: 37.7749
+    lang:
+      name: lang
+      in: query
+      description: 'BCP47 language tag for preferred response language (e.g. en, fr, de). Not all places have translated names.
+
+        '
+      schema:
+        type: string
+      example: en
     text:
       name: text
       in: query
@@ -152,143 +195,7 @@ components:
       schema:
         type: number
         format: float
-    boundary.circle.lat:
-      name: boundary.circle.lat
-      in: query
-      description: Latitude of the center of a circular boundary
-      schema:
-        type: number
-        format: float
-    boundary.country:
-      name: boundary.country
-      in: query
-      description: 'Comma-separated list of ISO-3166 alpha-2 or alpha-3 country codes to restrict results
-
-        '
-      schema:
-        type: string
-      example: GBR
-    boundary.rect.max_lon:
-      name: boundary.rect.max_lon
-      in: query
-      description: Maximum longitude of rectangular boundary (eastern edge)
-      schema:
-        type: number
-        format: float
-    boundary.circle.lon:
-      name: boundary.circle.lon
-      in: query
-      description: Longitude of the center of a circular boundary
-      schema:
-        type: number
-        format: float
-    boundary.rect.min_lon:
-      name: boundary.rect.min_lon
-      in: query
-      description: Minimum longitude of rectangular boundary (western edge)
-      schema:
-        type: number
-        format: float
-    focus.point.lat:
-      name: focus.point.lat
-      in: query
-      description: Latitude of the focus point to boost nearby results
-      schema:
-        type: number
-        format: float
-        minimum: -90
-        maximum: 90
-      example: 37.7749
   schemas:
-    ErrorResponse:
-      type: object
-      description: Error response from the Pelias API
-      properties:
-        geocoding:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: string
-              example:
-              - '''text'' parameter is required'
-            query:
-              type: object
-              additionalProperties: true
-        type:
-          type: string
-          enum:
-          - FeatureCollection
-        features:
-          type: array
-          items: {}
-    GeocodingFeature:
-      type: object
-      description: A GeoJSON Feature representing a geocoded place
-      required:
-      - type
-      - geometry
-      - properties
-      properties:
-        type:
-          type: string
-          enum:
-          - Feature
-        geometry:
-          type: object
-          description: GeoJSON Point geometry (coordinates are [longitude, latitude])
-          required:
-          - type
-          - coordinates
-          properties:
-            type:
-              type: string
-              enum:
-              - Point
-            coordinates:
-              type: array
-              description: '[longitude, latitude] in decimal degrees'
-              items:
-                type: number
-              minItems: 2
-              maxItems: 2
-        properties:
-          $ref: '#/components/schemas/PlaceProperties'
-        bbox:
-          type: array
-          description: Feature-level bounding box [minLon, minLat, maxLon, maxLat]
-          items:
-            type: number
-          minItems: 4
-          maxItems: 4
-    GeocodingResponse:
-      type: object
-      description: GeoJSON FeatureCollection returned by all Pelias endpoints
-      required:
-      - geocoding
-      - type
-      - features
-      properties:
-        geocoding:
-          $ref: '#/components/schemas/GeocodingMetadata'
-        type:
-          type: string
-          enum:
-          - FeatureCollection
-          description: GeoJSON type identifier
-        features:
-          type: array
-          description: List of matched place features
-          items:
-            $ref: '#/components/schemas/GeocodingFeature'
-        bbox:
-          type: array
-          description: Bounding box of all results [minLon, minLat, maxLon, maxLat]
-          items:
-            type: number
-          minItems: 4
-          maxItems: 4
     PlaceProperties:
       type: object
       description: Properties of a geocoded place
@@ -403,6 +310,29 @@ components:
           type: object
           description: Additional source-specific metadata
           additionalProperties: true
+    ErrorResponse:
+      type: object
+      description: Error response from the Pelias API
+      properties:
+        geocoding:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: string
+              example:
+              - '''text'' parameter is required'
+            query:
+              type: object
+              additionalProperties: true
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+        features:
+          type: array
+          items: {}
     GeocodingMetadata:
       type: object
       description: Metadata about the geocoding request and response
@@ -436,6 +366,72 @@ components:
           type: integer
           description: Unix timestamp of the response (milliseconds)
           example: 1525718151924
+    GeocodingResponse:
+      type: object
+      description: GeoJSON FeatureCollection returned by all Pelias endpoints
+      required:
+      - geocoding
+      - type
+      - features
+      properties:
+        geocoding:
+          $ref: '#/components/schemas/GeocodingMetadata'
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+          description: GeoJSON type identifier
+        features:
+          type: array
+          description: List of matched place features
+          items:
+            $ref: '#/components/schemas/GeocodingFeature'
+        bbox:
+          type: array
+          description: Bounding box of all results [minLon, minLat, maxLon, maxLat]
+          items:
+            type: number
+          minItems: 4
+          maxItems: 4
+    GeocodingFeature:
+      type: object
+      description: A GeoJSON Feature representing a geocoded place
+      required:
+      - type
+      - geometry
+      - properties
+      properties:
+        type:
+          type: string
+          enum:
+          - Feature
+        geometry:
+          type: object
+          description: GeoJSON Point geometry (coordinates are [longitude, latitude])
+          required:
+          - type
+          - coordinates
+          properties:
+            type:
+              type: string
+              enum:
+              - Point
+            coordinates:
+              type: array
+              description: '[longitude, latitude] in decimal degrees'
+              items:
+                type: number
+              minItems: 2
+              maxItems: 2
+        properties:
+          $ref: '#/components/schemas/PlaceProperties'
+        bbox:
+          type: array
+          description: Feature-level bounding box [minLon, minLat, maxLon, maxLat]
+          items:
+            type: number
+          minItems: 4
+          maxItems: 4
   responses:
     BadRequest:
       description: Bad request — missing or invalid parameters

@@ -1,10 +1,7 @@
 {
   "provider": "pelias",
   "sources": [
-    "pelias-autocomplete-api-openapi.yml",
-    "pelias-forward-geocoding-api-openapi.yml",
-    "pelias-place-lookup-api-openapi.yml",
-    "pelias-reverse-geocoding-api-openapi.yml"
+    "_original/openapi.yml"
   ],
   "outputs": [
     "pelias-autocomplete-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "pelias-autocomplete-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pelias-forward-geocoding-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pelias-place-lookup-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "pelias-reverse-geocoding-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Pelias Geocoding Autocomplete Reverse Geocoding API
-  description: 'Pelias is a modular, open-source geocoding search engine built on Elasticsearch. It converts addresses and place names into geographic coordinates (forward geocoding) and geographic coordinates into places and addresses (reverse geocoding). Powered entirely by open data from OpenStreetMap, OpenAddresses, Who''s on First, and Geonames, it is freely available under the MIT license and can be self-hosted or accessed via hosted services such as geocode.earth.
-
-    '
+  title: Pelias Geocoding Reverse Geocoding API
+  description: Pelias is a modular, open-source geocoding search engine built on Elasticsearch. It converts addresses and place names into geographic coordinates (forward geocoding) and geographic coordinates into places and addresses (reverse geocoding). Powered entirely by open data from OpenStreetMap, OpenAddresses, Who's on First, and Geonames, it is freely available under the MIT license and can be self-hosted or accessed via hosted services such as geocode.earth.
   version: '1.0'
   license:
     name: MIT
@@ -27,9 +25,7 @@ paths:
     get:
       operationId: reverseGeocode
       summary: Reverse geocode coordinates into place/address
-      description: 'Given a latitude and longitude, returns the nearest places and addresses from all available data sources. Optionally filter by source, layer, or boundary.
-
-        '
+      description: Given a latitude and longitude, returns the nearest places and addresses from all available data sources. Optionally filter by source, layer, or boundary.
       tags:
       - Reverse Geocoding
       parameters:
@@ -81,13 +77,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   parameters:
-    boundary.gid:
-      name: boundary.gid
-      in: query
-      description: Pelias gid of an administrative area to restrict results within
-      schema:
-        type: string
-      example: whosonfirst:locality:101748355
     size:
       name: size
       in: query
@@ -98,6 +87,24 @@ components:
         maximum: 40
         default: 10
       example: 10
+    lang:
+      name: lang
+      in: query
+      description: 'BCP47 language tag for preferred response language (e.g. en, fr, de). Not all places have translated names.
+
+        '
+      schema:
+        type: string
+      example: en
+    layers:
+      name: layers
+      in: query
+      description: 'Comma-separated list of layer types to restrict results. Valid values: venue, address, street, neighbourhood, borough, localadmin, locality, county, macrocounty, region, macroregion, country, coarse, postalcode
+
+        '
+      schema:
+        type: string
+      example: address,locality
     sources:
       name: sources
       in: query
@@ -116,15 +123,6 @@ components:
         - geonames
         - gn
       example: osm
-    lang:
-      name: lang
-      in: query
-      description: 'BCP47 language tag for preferred response language (e.g. en, fr, de). Not all places have translated names.
-
-        '
-      schema:
-        type: string
-      example: en
     boundary.country:
       name: boundary.country
       in: query
@@ -134,43 +132,14 @@ components:
       schema:
         type: string
       example: GBR
-    layers:
-      name: layers
+    boundary.gid:
+      name: boundary.gid
       in: query
-      description: 'Comma-separated list of layer types to restrict results. Valid values: venue, address, street, neighbourhood, borough, localadmin, locality, county, macrocounty, region, macroregion, country, coarse, postalcode
-
-        '
+      description: Pelias gid of an administrative area to restrict results within
       schema:
         type: string
-      example: address,locality
+      example: whosonfirst:locality:101748355
   schemas:
-    GeocodingResponse:
-      type: object
-      description: GeoJSON FeatureCollection returned by all Pelias endpoints
-      required:
-      - geocoding
-      - type
-      - features
-      properties:
-        geocoding:
-          $ref: '#/components/schemas/GeocodingMetadata'
-        type:
-          type: string
-          enum:
-          - FeatureCollection
-          description: GeoJSON type identifier
-        features:
-          type: array
-          description: List of matched place features
-          items:
-            $ref: '#/components/schemas/GeocodingFeature'
-        bbox:
-          type: array
-          description: Bounding box of all results [minLon, minLat, maxLon, maxLat]
-          items:
-            type: number
-          minItems: 4
-          maxItems: 4
     ErrorResponse:
       type: object
       description: Error response from the Pelias API
@@ -194,78 +163,6 @@ components:
         features:
           type: array
           items: {}
-    GeocodingMetadata:
-      type: object
-      description: Metadata about the geocoding request and response
-      properties:
-        version:
-          type: string
-          description: Pelias API version
-          example: '1.0'
-        attribution:
-          type: string
-          description: Attribution URL for the geocoding service
-          example: https://geocode.earth/guidelines
-        query:
-          type: object
-          description: Parsed query parameters
-          additionalProperties: true
-        engine:
-          type: object
-          description: Engine version information
-          properties:
-            name:
-              type: string
-              example: Pelias
-            author:
-              type: string
-              example: Mapzen
-            version:
-              type: string
-              example: '1.0'
-        timestamp:
-          type: integer
-          description: Unix timestamp of the response (milliseconds)
-          example: 1525718151924
-    GeocodingFeature:
-      type: object
-      description: A GeoJSON Feature representing a geocoded place
-      required:
-      - type
-      - geometry
-      - properties
-      properties:
-        type:
-          type: string
-          enum:
-          - Feature
-        geometry:
-          type: object
-          description: GeoJSON Point geometry (coordinates are [longitude, latitude])
-          required:
-          - type
-          - coordinates
-          properties:
-            type:
-              type: string
-              enum:
-              - Point
-            coordinates:
-              type: array
-              description: '[longitude, latitude] in decimal degrees'
-              items:
-                type: number
-              minItems: 2
-              maxItems: 2
-        properties:
-          $ref: '#/components/schemas/PlaceProperties'
-        bbox:
-          type: array
-          description: Feature-level bounding box [minLon, minLat, maxLon, maxLat]
-          items:
-            type: number
-          minItems: 4
-          maxItems: 4
     PlaceProperties:
       type: object
       description: Properties of a geocoded place
@@ -380,6 +277,118 @@ components:
           type: object
           description: Additional source-specific metadata
           additionalProperties: true
+    GeocodingFeature:
+      type: object
+      description: A GeoJSON Feature representing a geocoded place
+      required:
+      - type
+      - geometry
+      - properties
+      properties:
+        type:
+          type: string
+          enum:
+          - Feature
+        geometry:
+          type: object
+          description: GeoJSON Point geometry (coordinates are [longitude, latitude])
+          required:
+          - type
+          - coordinates
+          properties:
+            type:
+              type: string
+              enum:
+              - Point
+            coordinates:
+              type: array
+              description: '[longitude, latitude] in decimal degrees'
+              items:
+                type: number
+              minItems: 2
+              maxItems: 2
+        properties:
+          $ref: '#/components/schemas/PlaceProperties'
+        bbox:
+          type: array
+          description: Feature-level bounding box [minLon, minLat, maxLon, maxLat]
+          items:
+            type: number
+          minItems: 4
+          maxItems: 4
+    GeocodingMetadata:
+      type: object
+      description: Metadata about the geocoding request and response
+      properties:
+        version:
+          type: string
+          description: Pelias API version
+          example: '1.0'
+        attribution:
+          type: string
+          description: Attribution URL for the geocoding service
+          example: https://geocode.earth/guidelines
+        query:
+          type: object
+          description: Parsed query parameters
+          additionalProperties: true
+        engine:
+          type: object
+          description: Engine version information
+          properties:
+            name:
+              type: string
+              example: Pelias
+            author:
+              type: string
+              example: Mapzen
+            version:
+              type: string
+              example: '1.0'
+        timestamp:
+          type: integer
+          description: Unix timestamp of the response (milliseconds)
+          example: 1525718151924
+    GeocodingResponse:
+      type: object
+      description: GeoJSON FeatureCollection returned by all Pelias endpoints
+      required:
+      - geocoding
+      - type
+      - features
+      properties:
+        geocoding:
+          $ref: '#/components/schemas/GeocodingMetadata'
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+          description: GeoJSON type identifier
+        features:
+          type: array
+          description: List of matched place features
+          items:
+            $ref: '#/components/schemas/GeocodingFeature'
+        bbox:
+          type: array
+          description: Bounding box of all results [minLon, minLat, maxLon, maxLat]
+          items:
+            type: number
+          minItems: 4
+          maxItems: 4
+  responses:
+    BadRequest:
+      description: Bad request — missing or invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            geocoding:
+              errors:
+              - '''text'' parameter is required'
+            type: FeatureCollection
+            features: []
   examples:
     EiffelTowerReverse:
       summary: Reverse geocode the Eiffel Tower coordinates
@@ -412,19 +421,6 @@ components:
             country_a: FRA
             locality: Paris
             label: Tour Eiffel, Paris, France
-  responses:
-    BadRequest:
-      description: Bad request — missing or invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            geocoding:
-              errors:
-              - '''text'' parameter is required'
-            type: FeatureCollection
-            features: []
 externalDocs:
   description: Pelias Documentation
   url: https://github.com/pelias/documentation
