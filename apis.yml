@@ -1,17 +1,22 @@
 name: Pelias
 description: Pelias is a modular, open-source geocoding search engine built on Elasticsearch that converts addresses and place names into geographic coordinates (forward geocoding) and geographic coordinates into places and addresses (reverse geocoding). Powered entirely by open data from OpenStreetMap, OpenAddresses, Who's on First, and Geonames, it is freely available under the MIT license and can be self-hosted or accessed via hosted services.
 deliveryModel:
-  model: unknown
-  open_source: unknown
+  model: open-core
+  license: MIT
+  license_evidence:
+    repo: pelias/pelias
+    spdx: MIT
+    stars: 3592
+  open_source: true
   commercial: true
   callable_host: true
-  label: Delivery model not determined — needs a product licence on record
-  confidence: low
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: medium
   source:
   - openapi
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-license
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
@@ -30,7 +35,7 @@ tags:
   - Geocoding
   - Reverse Geocoding
   - Geospatial
-  - Open-Source
+  - Open Source
   - Elasticsearch
   - OpenStreetMap
   - Addresses
@@ -46,6 +51,7 @@ tags_raw:
   - addresses
   - places
   - autocomplete
+  - Open-Source
 created: "2026-06-13"
 modified: "2026-06-13"
 url: https://raw.githubusercontent.com/api-evangelist/pelias/main/apis.yml

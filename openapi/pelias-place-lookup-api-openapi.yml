@@ -55,29 +55,6 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Error response from the Pelias API
-      properties:
-        geocoding:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: string
-              example:
-              - '''text'' parameter is required'
-            query:
-              type: object
-              additionalProperties: true
-        type:
-          type: string
-          enum:
-          - FeatureCollection
-        features:
-          type: array
-          items: {}
     PlaceProperties:
       type: object
       description: Properties of a geocoded place
@@ -192,6 +169,89 @@ components:
           type: object
           description: Additional source-specific metadata
           additionalProperties: true
+    GeocodingMetadata:
+      type: object
+      description: Metadata about the geocoding request and response
+      properties:
+        version:
+          type: string
+          description: Pelias API version
+          example: '1.0'
+        attribution:
+          type: string
+          description: Attribution URL for the geocoding service
+          example: https://geocode.earth/guidelines
+        query:
+          type: object
+          description: Parsed query parameters
+          additionalProperties: true
+        engine:
+          type: object
+          description: Engine version information
+          properties:
+            name:
+              type: string
+              example: Pelias
+            author:
+              type: string
+              example: Mapzen
+            version:
+              type: string
+              example: '1.0'
+        timestamp:
+          type: integer
+          description: Unix timestamp of the response (milliseconds)
+          example: 1525718151924
+    ErrorResponse:
+      type: object
+      description: Error response from the Pelias API
+      properties:
+        geocoding:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: string
+              example:
+              - '''text'' parameter is required'
+            query:
+              type: object
+              additionalProperties: true
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+        features:
+          type: array
+          items: {}
+    GeocodingResponse:
+      type: object
+      description: GeoJSON FeatureCollection returned by all Pelias endpoints
+      required:
+      - geocoding
+      - type
+      - features
+      properties:
+        geocoding:
+          $ref: '#/components/schemas/GeocodingMetadata'
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+          description: GeoJSON type identifier
+        features:
+          type: array
+          description: List of matched place features
+          items:
+            $ref: '#/components/schemas/GeocodingFeature'
+        bbox:
+          type: array
+          description: Bounding box of all results [minLon, minLat, maxLon, maxLat]
+          items:
+            type: number
+          minItems: 4
+          maxItems: 4
     GeocodingFeature:
       type: object
       description: A GeoJSON Feature representing a geocoded place
@@ -227,66 +287,6 @@ components:
         bbox:
           type: array
           description: Feature-level bounding box [minLon, minLat, maxLon, maxLat]
-          items:
-            type: number
-          minItems: 4
-          maxItems: 4
-    GeocodingMetadata:
-      type: object
-      description: Metadata about the geocoding request and response
-      properties:
-        version:
-          type: string
-          description: Pelias API version
-          example: '1.0'
-        attribution:
-          type: string
-          description: Attribution URL for the geocoding service
-          example: https://geocode.earth/guidelines
-        query:
-          type: object
-          description: Parsed query parameters
-          additionalProperties: true
-        engine:
-          type: object
-          description: Engine version information
-          properties:
-            name:
-              type: string
-              example: Pelias
-            author:
-              type: string
-              example: Mapzen
-            version:
-              type: string
-              example: '1.0'
-        timestamp:
-          type: integer
-          description: Unix timestamp of the response (milliseconds)
-          example: 1525718151924
-    GeocodingResponse:
-      type: object
-      description: GeoJSON FeatureCollection returned by all Pelias endpoints
-      required:
-      - geocoding
-      - type
-      - features
-      properties:
-        geocoding:
-          $ref: '#/components/schemas/GeocodingMetadata'
-        type:
-          type: string
-          enum:
-          - FeatureCollection
-          description: GeoJSON type identifier
-        features:
-          type: array
-          description: List of matched place features
-          items:
-            $ref: '#/components/schemas/GeocodingFeature'
-        bbox:
-          type: array
-          description: Bounding box of all results [minLon, minLat, maxLon, maxLat]
           items:
             type: number
           minItems: 4
