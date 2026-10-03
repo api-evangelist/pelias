@@ -55,6 +55,33 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   schemas:
+    GeocodingResponse:
+      type: object
+      description: GeoJSON FeatureCollection returned by all Pelias endpoints
+      required:
+      - geocoding
+      - type
+      - features
+      properties:
+        geocoding:
+          $ref: '#/components/schemas/GeocodingMetadata'
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+          description: GeoJSON type identifier
+        features:
+          type: array
+          description: List of matched place features
+          items:
+            $ref: '#/components/schemas/GeocodingFeature'
+        bbox:
+          type: array
+          description: Bounding box of all results [minLon, minLat, maxLon, maxLat]
+          items:
+            type: number
+          minItems: 4
+          maxItems: 4
     PlaceProperties:
       type: object
       description: Properties of a geocoded place
@@ -202,56 +229,6 @@ components:
           type: integer
           description: Unix timestamp of the response (milliseconds)
           example: 1525718151924
-    ErrorResponse:
-      type: object
-      description: Error response from the Pelias API
-      properties:
-        geocoding:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: string
-              example:
-              - '''text'' parameter is required'
-            query:
-              type: object
-              additionalProperties: true
-        type:
-          type: string
-          enum:
-          - FeatureCollection
-        features:
-          type: array
-          items: {}
-    GeocodingResponse:
-      type: object
-      description: GeoJSON FeatureCollection returned by all Pelias endpoints
-      required:
-      - geocoding
-      - type
-      - features
-      properties:
-        geocoding:
-          $ref: '#/components/schemas/GeocodingMetadata'
-        type:
-          type: string
-          enum:
-          - FeatureCollection
-          description: GeoJSON type identifier
-        features:
-          type: array
-          description: List of matched place features
-          items:
-            $ref: '#/components/schemas/GeocodingFeature'
-        bbox:
-          type: array
-          description: Bounding box of all results [minLon, minLat, maxLon, maxLat]
-          items:
-            type: number
-          minItems: 4
-          maxItems: 4
     GeocodingFeature:
       type: object
       description: A GeoJSON Feature representing a geocoded place
@@ -291,6 +268,29 @@ components:
             type: number
           minItems: 4
           maxItems: 4
+    ErrorResponse:
+      type: object
+      description: Error response from the Pelias API
+      properties:
+        geocoding:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: string
+              example:
+              - '''text'' parameter is required'
+            query:
+              type: object
+              additionalProperties: true
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+        features:
+          type: array
+          items: {}
   responses:
     BadRequest:
       description: Bad request — missing or invalid parameters

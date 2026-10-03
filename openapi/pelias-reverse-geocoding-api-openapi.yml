@@ -77,6 +77,40 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   parameters:
+    boundary.gid:
+      name: boundary.gid
+      in: query
+      description: Pelias gid of an administrative area to restrict results within
+      schema:
+        type: string
+      example: whosonfirst:locality:101748355
+    sources:
+      name: sources
+      in: query
+      description: 'Comma-separated list of data sources to query. Valid values: openstreetmap (osm), openaddresses (oa), whosonfirst (wof), geonames (gn)
+
+        '
+      schema:
+        type: string
+        enum:
+        - openstreetmap
+        - osm
+        - openaddresses
+        - oa
+        - whosonfirst
+        - wof
+        - geonames
+        - gn
+      example: osm
+    layers:
+      name: layers
+      in: query
+      description: 'Comma-separated list of layer types to restrict results. Valid values: venue, address, street, neighbourhood, borough, localadmin, locality, county, macrocounty, region, macroregion, country, coarse, postalcode
+
+        '
+      schema:
+        type: string
+      example: address,locality
     boundary.country:
       name: boundary.country
       in: query
@@ -105,41 +139,57 @@ components:
       schema:
         type: string
       example: en
-    layers:
-      name: layers
-      in: query
-      description: 'Comma-separated list of layer types to restrict results. Valid values: venue, address, street, neighbourhood, borough, localadmin, locality, county, macrocounty, region, macroregion, country, coarse, postalcode
-
-        '
-      schema:
-        type: string
-      example: address,locality
-    boundary.gid:
-      name: boundary.gid
-      in: query
-      description: Pelias gid of an administrative area to restrict results within
-      schema:
-        type: string
-      example: whosonfirst:locality:101748355
-    sources:
-      name: sources
-      in: query
-      description: 'Comma-separated list of data sources to query. Valid values: openstreetmap (osm), openaddresses (oa), whosonfirst (wof), geonames (gn)
-
-        '
-      schema:
-        type: string
-        enum:
-        - openstreetmap
-        - osm
-        - openaddresses
-        - oa
-        - whosonfirst
-        - wof
-        - geonames
-        - gn
-      example: osm
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response from the Pelias API
+      properties:
+        geocoding:
+          type: object
+          properties:
+            errors:
+              type: array
+              items:
+                type: string
+              example:
+              - '''text'' parameter is required'
+            query:
+              type: object
+              additionalProperties: true
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+        features:
+          type: array
+          items: {}
+    GeocodingResponse:
+      type: object
+      description: GeoJSON FeatureCollection returned by all Pelias endpoints
+      required:
+      - geocoding
+      - type
+      - features
+      properties:
+        geocoding:
+          $ref: '#/components/schemas/GeocodingMetadata'
+        type:
+          type: string
+          enum:
+          - FeatureCollection
+          description: GeoJSON type identifier
+        features:
+          type: array
+          description: List of matched place features
+          items:
+            $ref: '#/components/schemas/GeocodingFeature'
+        bbox:
+          type: array
+          description: Bounding box of all results [minLon, minLat, maxLon, maxLat]
+          items:
+            type: number
+          minItems: 4
+          maxItems: 4
     PlaceProperties:
       type: object
       description: Properties of a geocoded place
@@ -287,56 +337,6 @@ components:
           type: integer
           description: Unix timestamp of the response (milliseconds)
           example: 1525718151924
-    ErrorResponse:
-      type: object
-      description: Error response from the Pelias API
-      properties:
-        geocoding:
-          type: object
-          properties:
-            errors:
-              type: array
-              items:
-                type: string
-              example:
-              - '''text'' parameter is required'
-            query:
-              type: object
-              additionalProperties: true
-        type:
-          type: string
-          enum:
-          - FeatureCollection
-        features:
-          type: array
-          items: {}
-    GeocodingResponse:
-      type: object
-      description: GeoJSON FeatureCollection returned by all Pelias endpoints
-      required:
-      - geocoding
-      - type
-      - features
-      properties:
-        geocoding:
-          $ref: '#/components/schemas/GeocodingMetadata'
-        type:
-          type: string
-          enum:
-          - FeatureCollection
-          description: GeoJSON type identifier
-        features:
-          type: array
-          description: List of matched place features
-          items:
-            $ref: '#/components/schemas/GeocodingFeature'
-        bbox:
-          type: array
-          description: Bounding box of all results [minLon, minLat, maxLon, maxLat]
-          items:
-            type: number
-          minItems: 4
-          maxItems: 4
     GeocodingFeature:
       type: object
       description: A GeoJSON Feature representing a geocoded place

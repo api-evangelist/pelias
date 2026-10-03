@@ -135,16 +135,13 @@ paths:
           $ref: '#/components/responses/BadRequest'
 components:
   parameters:
-    size:
-      name: size
+    boundary.rect.min_lon:
+      name: boundary.rect.min_lon
       in: query
-      description: Maximum number of results to return (default 10, max 40)
+      description: Minimum longitude of rectangular boundary (western edge)
       schema:
-        type: integer
-        minimum: 1
-        maximum: 40
-        default: 10
-      example: 10
+        type: number
+        format: float
     layers:
       name: layers
       in: query
@@ -154,13 +151,28 @@ components:
       schema:
         type: string
       example: address,locality
-    boundary.gid:
-      name: boundary.gid
+    text:
+      name: text
       in: query
-      description: Pelias gid of an administrative area to restrict results within
+      required: true
+      description: Free-form text to geocode (addresses, place names, etc.)
       schema:
         type: string
-      example: whosonfirst:locality:101748355
+      example: YMCA
+    boundary.rect.min_lat:
+      name: boundary.rect.min_lat
+      in: query
+      description: Minimum latitude of rectangular boundary (southern edge)
+      schema:
+        type: number
+        format: float
+    boundary.circle.lon:
+      name: boundary.circle.lon
+      in: query
+      description: Longitude of the center of a circular boundary
+      schema:
+        type: number
+        format: float
     sources:
       name: sources
       in: query
@@ -179,42 +191,6 @@ components:
         - geonames
         - gn
       example: osm
-    boundary.rect.max_lat:
-      name: boundary.rect.max_lat
-      in: query
-      description: Maximum latitude of rectangular boundary (northern edge)
-      schema:
-        type: number
-        format: float
-    boundary.circle.lat:
-      name: boundary.circle.lat
-      in: query
-      description: Latitude of the center of a circular boundary
-      schema:
-        type: number
-        format: float
-    boundary.circle.lon:
-      name: boundary.circle.lon
-      in: query
-      description: Longitude of the center of a circular boundary
-      schema:
-        type: number
-        format: float
-    boundary.rect.min_lat:
-      name: boundary.rect.min_lat
-      in: query
-      description: Minimum latitude of rectangular boundary (southern edge)
-      schema:
-        type: number
-        format: float
-    text:
-      name: text
-      in: query
-      required: true
-      description: Free-form text to geocode (addresses, place names, etc.)
-      schema:
-        type: string
-      example: YMCA
     boundary.country:
       name: boundary.country
       in: query
@@ -224,16 +200,39 @@ components:
       schema:
         type: string
       example: GBR
-    focus.point.lat:
-      name: focus.point.lat
+    boundary.gid:
+      name: boundary.gid
       in: query
-      description: Latitude of the focus point to boost nearby results
+      description: Pelias gid of an administrative area to restrict results within
+      schema:
+        type: string
+      example: whosonfirst:locality:101748355
+    boundary.rect.max_lon:
+      name: boundary.rect.max_lon
+      in: query
+      description: Maximum longitude of rectangular boundary (eastern edge)
       schema:
         type: number
         format: float
-        minimum: -90
-        maximum: 90
-      example: 37.7749
+    size:
+      name: size
+      in: query
+      description: Maximum number of results to return (default 10, max 40)
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 40
+        default: 10
+      example: 10
+    lang:
+      name: lang
+      in: query
+      description: 'BCP47 language tag for preferred response language (e.g. en, fr, de). Not all places have translated names.
+
+        '
+      schema:
+        type: string
+      example: en
     focus.point.lon:
       name: focus.point.lon
       in: query
@@ -244,26 +243,27 @@ components:
         minimum: -180
         maximum: 180
       example: -122.4194
-    lang:
-      name: lang
+    boundary.circle.lat:
+      name: boundary.circle.lat
       in: query
-      description: 'BCP47 language tag for preferred response language (e.g. en, fr, de). Not all places have translated names.
-
-        '
-      schema:
-        type: string
-      example: en
-    boundary.rect.min_lon:
-      name: boundary.rect.min_lon
-      in: query
-      description: Minimum longitude of rectangular boundary (western edge)
+      description: Latitude of the center of a circular boundary
       schema:
         type: number
         format: float
-    boundary.rect.max_lon:
-      name: boundary.rect.max_lon
+    focus.point.lat:
+      name: focus.point.lat
       in: query
-      description: Maximum longitude of rectangular boundary (eastern edge)
+      description: Latitude of the focus point to boost nearby results
+      schema:
+        type: number
+        format: float
+        minimum: -90
+        maximum: 90
+      example: 37.7749
+    boundary.rect.max_lat:
+      name: boundary.rect.max_lat
+      in: query
+      description: Maximum latitude of rectangular boundary (northern edge)
       schema:
         type: number
         format: float
@@ -275,6 +275,39 @@ components:
         type: number
         format: float
   schemas:
+    GeocodingMetadata:
+      type: object
+      description: Metadata about the geocoding request and response
+      properties:
+        version:
+          type: string
+          description: Pelias API version
+          example: '1.0'
+        attribution:
+          type: string
+          description: Attribution URL for the geocoding service
+          example: https://geocode.earth/guidelines
+        query:
+          type: object
+          description: Parsed query parameters
+          additionalProperties: true
+        engine:
+          type: object
+          description: Engine version information
+          properties:
+            name:
+              type: string
+              example: Pelias
+            author:
+              type: string
+              example: Mapzen
+            version:
+              type: string
+              example: '1.0'
+        timestamp:
+          type: integer
+          description: Unix timestamp of the response (milliseconds)
+          example: 1525718151924
     PlaceProperties:
       type: object
       description: Properties of a geocoded place
@@ -389,39 +422,6 @@ components:
           type: object
           description: Additional source-specific metadata
           additionalProperties: true
-    GeocodingMetadata:
-      type: object
-      description: Metadata about the geocoding request and response
-      properties:
-        version:
-          type: string
-          description: Pelias API version
-          example: '1.0'
-        attribution:
-          type: string
-          description: Attribution URL for the geocoding service
-          example: https://geocode.earth/guidelines
-        query:
-          type: object
-          description: Parsed query parameters
-          additionalProperties: true
-        engine:
-          type: object
-          description: Engine version information
-          properties:
-            name:
-              type: string
-              example: Pelias
-            author:
-              type: string
-              example: Mapzen
-            version:
-              type: string
-              example: '1.0'
-        timestamp:
-          type: integer
-          description: Unix timestamp of the response (milliseconds)
-          example: 1525718151924
     ErrorResponse:
       type: object
       description: Error response from the Pelias API
@@ -511,6 +511,19 @@ components:
             type: number
           minItems: 4
           maxItems: 4
+  responses:
+    BadRequest:
+      description: Bad request — missing or invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            geocoding:
+              errors:
+              - '''text'' parameter is required'
+            type: FeatureCollection
+            features: []
   examples:
     YMCASearch:
       summary: Search for YMCA worldwide
@@ -551,19 +564,6 @@ components:
             country_a: GBR
             locality: Bargoed
             label: YMCA, Bargoed Community, United Kingdom
-  responses:
-    BadRequest:
-      description: Bad request — missing or invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-          example:
-            geocoding:
-              errors:
-              - '''text'' parameter is required'
-            type: FeatureCollection
-            features: []
 externalDocs:
   description: Pelias Documentation
   url: https://github.com/pelias/documentation
