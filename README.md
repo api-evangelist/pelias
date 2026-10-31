@@ -64,43 +64,143 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Pelias is a modular, open-source geocoding search engine built on Elasticsearch. It converts addresses and place names into geographic coordinates (forward geocoding) and geographic coordinates into places and addresses (reverse geocoding). Powered entirely by open data, it is available under the MIT license and can be self-hosted or accessed via commercial hosted services.
+Pelias is a modular, open-source geocoding search engine built on Elasticsearch that converts addresses and place names into geographic coordinates (forward geocoding) and geographic coordinates into places and addresses (reverse geocoding). Powered entirely by open data from OpenStreetMap, OpenAddresses, Who's on First, and Geonames, it is freely available under the MIT license and can be self-hosted or accessed via hosted services.
 
-## API Endpoints
+**Areas:** Geocoding · Reverse Geocoding · Geospatial · Open Source · Elasticsearch · OpenStreetMap · Addresses · Places · Autocomplete
 
-| Endpoint | Path | Description |
-|----------|------|-------------|
-| Forward Geocoding | `GET /v1/search` | Find a place by address or name |
-| Reverse Geocoding | `GET /v1/reverse` | Find what is at a coordinate |
-| Autocomplete | `GET /v1/autocomplete` | Real-time suggestions as the user types |
-| Structured Geocoding | `GET /v1/search/structured` | Geocode pre-parsed address components |
-| Place Lookup | `GET /v1/place` | Retrieve details for a known place GID |
+## Pelias on APIs.io
 
-All responses are returned as GeoJSON.
+Everything profiled for Pelias is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/pelias/](https://apis.io/providers/pelias/)** — or go straight to one of the APIs or properties below.
 
-## Data Sources
+### APIs (4)
 
-- OpenStreetMap
-- OpenAddresses
-- Who's on First
-- Geonames
-- Polylines
-- CSV (custom datasets)
+- [Pelias Autocomplete API](https://apis.io/apis/pelias/pelias-autocomplete-api/) — Real-time type-ahead geocoding for user input
+- [Pelias Forward Geocoding API](https://apis.io/apis/pelias/pelias-forward-geocoding-api/) — Convert text or addresses into geographic coordinates
+- [Pelias Place Lookup API](https://apis.io/apis/pelias/pelias-place-lookup-api/) — Retrieve details for a known place by ID
+- [Pelias Reverse Geocoding API](https://apis.io/apis/pelias/pelias-reverse-geocoding-api/) — Convert geographic coordinates into places and addresses
 
-## Deployment
+### Published properties
 
-- **Self-hosted**: Use the [Docker setup](https://github.com/pelias/docker) to run Pelias locally or in the cloud.
-- **Hosted service**: [Geocode Earth](https://geocode.earth) is the commercial API built by the original Pelias team, with plans starting at $100/month.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Links
+#### Agentic access (1)
 
-- Website: https://pelias.io
-- Documentation: https://github.com/pelias/documentation
-- GitHub Organization: https://github.com/pelias
-- Hosted Service: https://geocode.earth
-- Community Chat: https://gitter.im/pelias/pelias
-- Contact: team@pelias.io
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## License
+- [Pelias Agentic Access](https://apis.io/agentic-access/pelias/pelias-agentic-access/)
 
-MIT License
+#### JSON Schema (1)
+
+The data models the API reads and writes.
+
+- [Pelias Geocoding Response](https://apis.io/schemas/pelias/geocoding-response/)
+
+#### Examples (4)
+
+Example requests and responses.
+
+- [Autocomplete](https://apis.io/examples/pelias/autocomplete/)
+- [Reverse](https://apis.io/examples/pelias/reverse/)
+- [Search](https://apis.io/examples/pelias/search/)
+- [Structured](https://apis.io/examples/pelias/structured/)
+
+#### Collections (4)
+
+Postman and Open Collection request collections.
+
+- [Pelias Geocoding Autocomplete API](https://apis.io/collections/pelias/open-pelias-autocomplete-api/)
+- [Pelias Geocoding Autocomplete Forward Geocoding API](https://apis.io/collections/pelias/open-pelias-forward-geocoding-api/)
+- [Pelias Geocoding Autocomplete Place Lookup API](https://apis.io/collections/pelias/open-pelias-place-lookup-api/)
+- [Pelias Geocoding Autocomplete Reverse Geocoding API](https://apis.io/collections/pelias/open-pelias-reverse-geocoding-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Pelias — jsonschema rules](https://apis.io/rules/pelias/pelias-jsonschema-spectral-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Pelias Domain Security](https://apis.io/security/pelias/pelias-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/pelias/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/pelias/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/pelias/finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://pelias.io)
+- [Documentation](https://github.com/pelias/documentation)
+- [Support](https://gitter.im/pelias/pelias)
+- [GitHub](https://github.com/pelias)
+
+## API Evangelist rating
+
+**Kin Score 23.8** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 47.8 |
+| Contract governance | 9.8 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 9.5 |
+| Access clarity | 7.9 |
+
+**Agent readiness 25.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/pelias/](https://apis.io/providers/pelias/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Pelias: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/pelias/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
